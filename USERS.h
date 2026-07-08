@@ -1,5 +1,5 @@
-#ifndef STRUCTURES_H
-#define STRUCTURES_H
+#ifndef USERS
+
 
 typedef struct{
     int id;
