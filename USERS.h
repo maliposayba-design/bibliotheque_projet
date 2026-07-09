@@ -19,4 +19,5 @@ int genererIdUtilisateur();
 void ajouterUtilisateur();
 void afficherUtilisateurs();
 int login_existe(char login[]);
+int connexion();
 #endif

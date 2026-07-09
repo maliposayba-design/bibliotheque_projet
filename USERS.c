@@ -48,7 +48,7 @@ void ajouterUtilisateur(){
         }
 
         if (strlen(u.login) != 6) {
-            printf("Le login doit contenir exactement 6 caractères\n");
+            printf("Le login doit contenir exactement 6 caractères et majuscule\n");
         }
         log = login_existe(u.login);
         if (log == 1) {
@@ -155,3 +155,58 @@ int login_existe(char login[]){
 
 }
 
+int connexion(){
+    FILE *f;
+
+    User u;
+
+    char login[7];
+    char motPasse[100];
+
+    printf("CONNEXION\n");
+
+        printf("Login : ");
+        scanf("%s", login);
+
+
+    f = fopen("DATABASE/USERS.dat", "rb");
+
+    if(f == NULL)
+    {
+        printf("Impossible d'ouvrir le fichier.\n");
+        return 0;
+    }
+
+
+    printf("Mot de passe : ");
+    scanf("%s", motPasse);
+
+    while(fread(&u, sizeof(User), 1, f))
+    {
+        if(strcmp(login, u.login) == 0 &&
+           strcmp(motPasse, u.motPasse) == 0)
+        {
+            fclose(f);
+
+            printf("\nConnexion reussie.\n");
+            printf("Bienvenue %s %s\n", u.prenom, u.nom);
+
+            if(strcmp(u.role, "ADMIN") == 0)
+            {
+                printf("Vous etes connecte en tant qu'ADMIN.\n");
+            }
+            else
+            {
+                printf("Vous etes connecte en tant qu'UTILISATEUR.\n");
+            }
+
+            return 1;
+        }
+    }
+
+    fclose(f);
+    printf("\nLogin ou mot de passe incorrecte");
+
+    return 0;
+
+}

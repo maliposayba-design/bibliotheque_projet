@@ -6,6 +6,7 @@ int main()
     printf("Hello world!\n");
      ajouterUtilisateur();
     //afficherUtilisateurs();
-    printf("%d",sizeof(User));
+    //connexion();
+
     return 0;
 }
