@@ -1,14 +1,15 @@
 # depslib dependency file v1.0
-1783470534 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\main.c
+1783560199 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\main.c
 	<stdio.h>
 	<stdlib.h>
 	"USERS.h"
 
-1783470456 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\users.h
+1783499899 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\users.h
 
-1783470410 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\users.c
+1783560213 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\users.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<ctype.h>
 	"USERS.h"
 

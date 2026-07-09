@@ -4,6 +4,7 @@
 int main()
 {
     printf("Hello world!\n");
-    afficherUtilisateurs();
+     ajouterUtilisateur();
+    //afficherUtilisateurs();
     return 0;
 }
