@@ -1,11 +1,11 @@
-#ifndef STRUCTURES_H
-#define STRUCTURES_H
+#ifndef USERS
+#define USERS
 
 typedef struct{
     int id;
     char nom[50];
     char prenom[50];
-    char telephone[20];
+    int telephone;
     char email[100];
     char login[7];
     char motPasse[100];
@@ -18,5 +18,5 @@ typedef struct{
 int genererIdUtilisateur();
 void ajouterUtilisateur();
 void afficherUtilisateurs();
-int login_existe(char *login);
+int login_existe(char login[]);
 #endif

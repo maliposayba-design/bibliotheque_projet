@@ -38,7 +38,7 @@ void ajouterUtilisateur(){
         printf("Login : ");
         scanf("%s",u.login);
         for (int i = 0; u.login[i] != '\0'; i++) {
-            if (!isupper(u.login[i])) {
+            if(u.login[i] < 'A' || u.login[i] > 'Z') {
                 minuscule = 1;
                 break;
             }
@@ -51,7 +51,7 @@ void ajouterUtilisateur(){
             printf("Le login doit contenir exactement 6 caractères\n");
         }
         log = login_existe(u.login);
-        if (log = 1) {
+        if (log == 1) {
             printf("Ce login existe deja, veuillez en choisir un autre.\n");
         }
     }while(minuscule != 0 || strlen(u.login) != 6 || log != 0);
@@ -133,7 +133,7 @@ void afficherUtilisateurs(){
     fclose(f);
 }
 
-int login_existe(char *login){
+int login_existe(char login[]){
     FILE *f;
 
     User tester;
@@ -142,7 +142,7 @@ int login_existe(char *login){
 
     if(f == NULL){
         printf("erreur");
-        return;
+        return 0;
     }
     while (fread(&tester, sizeof(User), 1, f)) {
         if (strcmp(login, tester.login) == 0) {
