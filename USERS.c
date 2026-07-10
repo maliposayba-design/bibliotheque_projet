@@ -240,3 +240,7 @@ void menuAdmin()
 
     }while(choix != 0);
 }
+
+void menuUser(){
+    printf("samira c'est toi qui doit remplire ca");
+}

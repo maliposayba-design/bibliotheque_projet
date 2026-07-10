@@ -21,4 +21,5 @@ void afficherUtilisateurs();
 int login_existe(char login[]);
 int connexion();
 void menuAdmin();
+void menuUser();
 #endif
