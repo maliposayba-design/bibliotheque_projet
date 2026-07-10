@@ -210,3 +210,33 @@ int connexion(){
     return 0;
 
 }
+
+
+void menuAdmin()
+{
+    int choix;
+
+    do
+    {
+        printf("\n MENU ADMIN n");
+
+        printf("1. Ajouter un utilisateur\n");
+        printf("2. Afficher les utilisateurs\n");
+
+        printf("\nChoix : ");
+        scanf("%d",&choix);
+
+        switch(choix)
+        {
+            case 1:
+                ajouterUtilisateur();
+                break;
+
+            case 2:
+                afficherUtilisateurs();
+                break;
+
+        }
+
+    }while(choix != 0);
+}
