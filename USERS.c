@@ -48,7 +48,7 @@ void ajouterUtilisateur(){
         }
 
         if (strlen(u.login) != 6) {
-            printf("Le login doit contenir exactement 6 caractères et majuscule\n");
+            printf("Le login doit contenir exactement 6 caractï¿½res et majuscule\n");
         }
         log = login_existe(u.login);
         if (log == 1) {
@@ -160,13 +160,10 @@ int connexion(){
 
     User u;
 
-    char login[7];
+    char login[15];
     char motPasse[100];
 
-    printf("CONNEXION\n");
-
-        printf("Login : ");
-        scanf("%s", login);
+    
 
 
     f = fopen("DATABASE/USERS.dat", "rb");
@@ -177,9 +174,12 @@ int connexion(){
         return 0;
     }
 
+    printf("CONNEXION\n");
 
-    printf("Mot de passe : ");
-    scanf("%s", motPasse);
+        printf("Login : ");
+        scanf("%s", login);
+        printf("Mot de passe : ");
+        scanf("%s", motPasse);
 
     while(fread(&u, sizeof(User), 1, f))
     {

@@ -13,6 +13,7 @@ typedef struct{
     char etat[10];
     char dateCreation[20];
     char derniereConnexion[20];
+    int premierconnexion;
 }User;
 
 int id_utilisateur();
