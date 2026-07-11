@@ -117,7 +117,7 @@ void afficherUtilisateurs(){
 
         printf("\nPrenom : %s",u.prenom);
 
-        printf("\nTelephone : %s",u.telephone);
+        printf("\nTelephone : %d",u.telephone);
 
         printf("\nEmail : %s",u.email);
 
@@ -235,12 +235,12 @@ void menuAdmin()
             case 2:
                 afficherUtilisateurs();
                 break;
-
+            printf("Samira c'est toi qui doit remplire ca");
         }
 
     }while(choix != 0);
 }
 
 void menuUser(){
-    printf("samira c'est toi qui doit remplire ca");
+    printf("Samira c'est toi qui doit remplire ca");
 }

@@ -15,7 +15,7 @@ typedef struct{
     char derniereConnexion[20];
 }User;
 
-int genererIdUtilisateur();
+int id_utilisateur();
 void ajouterUtilisateur();
 void afficherUtilisateurs();
 int login_existe(char login[]);
