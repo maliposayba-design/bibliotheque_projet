@@ -26,7 +26,7 @@ void ajouterUtilisateur(){
     scanf("%s",u.prenom);
 
     printf("Telephone : ");
-    scanf("%s",u.telephone);
+    scanf("%d",&u.telephone);
 
     printf("Email : ");
     scanf("%s",u.email);
@@ -48,7 +48,7 @@ void ajouterUtilisateur(){
         }
 
         if (strlen(u.login) != 6) {
-            printf("Le login doit contenir exactement 6 caract�res et majuscule\n");
+            printf("Le login doit contenir exactement 6 caracteres\n");
         }
         log = login_existe(u.login);
         if (log == 1) {
