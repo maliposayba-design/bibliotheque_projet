@@ -163,7 +163,7 @@ int connexion(){
     char login[15];
     char motPasse[100];
 
-    
+
 
 
     f = fopen("DATABASE/USERS.dat", "rb");
@@ -244,3 +244,5 @@ void menuAdmin()
 void menuUser(){
     printf("Samira c'est toi qui doit remplire ca");
 }
+
+
