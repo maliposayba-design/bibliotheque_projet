@@ -20,6 +20,7 @@ int id_utilisateur();
 void ajouterUtilisateur();
 void afficherUtilisateurs();
 int login_existe(char login[]);
+void supprimer_utilisateur();
 int connexion();
 void menuAdmin();
 void menuUser();

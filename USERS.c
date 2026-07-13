@@ -245,4 +245,25 @@ void menuUser(){
     printf("Samira c'est toi qui doit remplire ca");
 }
 
+void supprimer_utilisateur(){
+    FILE *f;
+    FILE *temp;
+    User u;
+    int id;
+    int trouve = 0;
+    int confirmation;
+
+    f=fopen("DATABASE/USERS.dat","rb");
+    temp=fopen("DATABASE/TEMP.dat","wb");
+    if(f== NULL){
+        printf("erreur lors de l'ouverture du fichier U");
+        return;
+    }
+    if(temp == NULL){
+        printf("erreur lors de l'ouverture du fichier T");
+        return;
+    }
+
+}
+
 
