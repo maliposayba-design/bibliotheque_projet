@@ -2,6 +2,7 @@
 #include "authors.h"
 #include "categories.h"
 #include "books.h"
+#include "USERS.h"
 
 int main()
 {
