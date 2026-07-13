@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1783966306 source:c:\cours\langage c\projets_langage_c\bibliotheque_gestion\categories.c
+	<stdio.h>
+	"categories.h"
+
+1783967287 c:\cours\langage c\projets_langage_c\bibliotheque_gestion\categories.h
+
+1783966675 source:c:\cours\langage c\projets_langage_c\bibliotheque_gestion\main.c
+	<stdio.h>
+	"authors.h"
+	"categories.h"
+	"books.h"
+
+1783967228 c:\cours\langage c\projets_langage_c\bibliotheque_gestion\authors.h
+	"books.h"
+
+1783967391 c:\cours\langage c\projets_langage_c\bibliotheque_gestion\books.h
+	"authors.h"
+	"categories.h"
+
+1783966665 source:c:\cours\langage c\projets_langage_c\bibliotheque_gestion\authors.c
+	<stdio.h>
+	"books.h"
+	"authors.h"
+

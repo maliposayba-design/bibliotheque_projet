@@ -1,12 +1,5 @@
 #include <stdio.h>
-typedef struct
-{
-    int id_categorie;
-    char date_creation[11];
-    char description[100];
-    char libelle[50];
-} CATEGORY;
-
+#include "categories.h"
 int generer_id_categorie()
 {
     CATEGORY dernier;
@@ -48,16 +41,6 @@ void saisir_categorie(CATEGORY *C)
     scanf("%10s", C->date_creation);
 }
 
-void afficher_categorie(CATEGORY C)
-{
-    printf("\n=========================\n");
-    printf("ID : %d\n",C.id);
-    printf("Libelle : %s\n",C.libelle);
-    printf("description : %s\n",C.description);
-    printf("Date de creation de la categorie : %s\n",C.date_creation);
-    printf("=========================\n");
-}
-
 void enregistrer_categorie(CATEGORY C)
 {
     FILE *f;
@@ -88,7 +71,7 @@ void ajout_categorie()
     printf("\nCategorie ajoutee avec succes !\n");
 }
 
-void afficher_auteur(CATEGORY C)
+void afficher_categorie(CATEGORY C)
 {
     printf("\n=========================================\n");
     printf("       INFORMATIONS DE LA CATEGORIE\n");
@@ -151,6 +134,8 @@ void modifier_categorie()
         printf("Erreur d'ouverture du fichier.\n");
         return;
     }
+
+    afficher_liste_categorie();
 
     printf("\nEntrer l'ID de la categorie a modifier : ");
     scanf("%d", &id);
@@ -229,6 +214,8 @@ void supprimer_categorie()
         return;
     }
 
+    afficher_liste_categorie();
+
     printf("\nEntrer l'ID de la categorie a supprimer : ");
     scanf("%d", &id);
 
@@ -268,4 +255,72 @@ void supprimer_categorie()
         remove("DATABASE/TEMP.dat");
         printf("\ncategorie introuvable.\n");
     }
+}
+
+void menu_categories()
+{
+    int choix;
+
+    do
+    {
+        printf("\n========== MENU CATEGORIES ==========\n");
+        printf("1. Ajouter une categorie\n");
+        printf("2. Afficher la liste des categories\n");
+        printf("3. Afficher les details d'une categorie\n");   // <-- nouvelle ligne
+        printf("4. Modifier une categorie\n");
+        printf("5. Supprimer une categorie\n");
+        printf("0. Retour au menu principal\n");
+        printf("Votre choix : ");
+        scanf("%d", &choix);
+
+        switch (choix)
+        {
+            case 1: ajout_categorie(); break;
+            case 2: afficher_liste_categorie(); break;
+            case 3: rechercher_categorie(); break;   // <-- nouvelle ligne
+            case 4: modifier_categorie(); break;
+            case 5: supprimer_categorie(); break;
+            case 0: printf("Retour...\n"); break;
+            default: printf("Choix invalide.\n");
+        }
+
+    } while (choix != 0);
+}
+
+void rechercher_categorie()
+{
+    FILE *f;
+    CATEGORY C;
+    int id;
+    int trouve = 0;
+
+    f = fopen("DATABASE/CATEGORIES.dat", "rb");
+
+    if (f == NULL)
+    {
+        printf("\nAucune categorie enregistree.\n");
+        return;
+    }
+
+    afficher_liste_categorie();
+
+    printf("\nEntrer l'ID de la categorie a afficher : ");
+    scanf("%d", &id);
+
+    while (fread(&C, sizeof(CATEGORY), 1, f) == 1)
+    {
+        if (C.id_categorie == id)
+        {
+            trouve = 1;
+            afficher_categorie(C);
+            break;
+        }
+    }
+
+    if (!trouve)
+    {
+        printf("\nCategorie introuvable.\n");
+    }
+
+    fclose(f);
 }

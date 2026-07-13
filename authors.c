@@ -1,16 +1,6 @@
 #include <stdio.h>
-
-//Un auteur ne peut être supprimé que si aucun livre ne lui est associé,tu dois rajouter ça après avoir fini avec livre.
-typedef struct
-{
-    int id;
-    char nom_auteur[25];
-    char nationalite[20];
-    char date_naissance[11];
-    char biographie[250];
-    int nb_livres;
-
-} AUTHORS;
+#include "books.h"
+#include "authors.h"
 
 int generer_id_auteur()
 {
@@ -54,21 +44,15 @@ void saisir_auteur(AUTHORS *A)
 
     printf("Biographie : ");
     scanf(" %[^\n]", A->biographie);
-
+ do
+{
     printf("Nombre de livres publies : ");
     scanf("%d", &A->nb_livres);
-}
 
-void afficher_auteur(AUTHORS A)
-{
-    printf("\n=========================\n");
-    printf("ID : %d\n",A.id);
-    printf("Nom : %s\n",A.nom_auteur);
-    printf("Nationalite : %s\n",A.nationalite);
-    printf("Date : %s\n",A.date_naissance);
-    printf("Biographie : %s\n",A.biographie);
-    printf("Nombre de livres : %d\n",A.nb_livres);
-    printf("=========================\n");
+    if (A->nb_livres < 0)
+        printf("Le nombre de livres ne peut pas etre negatif. Veuillez reessayer.\n");
+
+} while (A->nb_livres < 0);
 }
 
 void enregistrer_auteur(AUTHORS A)
@@ -168,7 +152,7 @@ void modifier_auteur()
         printf("Erreur d'ouverture du fichier.\n");
         return;
     }
-
+    afficher_liste_auteurs();
     printf("\nEntrer l'ID de l'auteur a modifier : ");
     scanf("%d", &id);
 
@@ -214,9 +198,17 @@ void modifier_auteur()
                     scanf(" %[^\n]", A.biographie);
                     break;
 
-                case 5:
-                    printf("Nouveau nombre de livres : ");
-                    scanf("%d", &A.nb_livres);
+               case 5:
+                    do
+                      {
+                       printf("Nouveau nombre de livres : ");
+                       scanf("%d",&A.nb_livres);
+
+                      if(A.nb_livres<0)
+                      printf("Le nombre de livres ne peut pas etre negatif.\n");
+
+                     }while(A.nb_livres<0);
+
                     break;
 
                 case 6:
@@ -263,6 +255,7 @@ void supprimer_auteur()
         printf("Erreur d'ouverture des fichiers.\n");
         return;
     }
+    afficher_liste_auteurs();
 
     printf("\nEntrer l'ID de l'auteur a supprimer : ");
     scanf("%d", &id);
@@ -270,10 +263,21 @@ void supprimer_auteur()
     while (fread(&A, sizeof(AUTHORS), 1, f) == 1)
     {
         if (A.id == id)
-        {
-            afficher_auteur(A);
+{
+    if (auteur_a_des_livres(A.id))
+    {
+        printf("\nImpossible de supprimer cet auteur.\n");
+        printf("Des livres lui sont encore associes.\n");
 
-            printf("\nVoulez-vous vraiment supprimer cet auteur ?\n");
+        fclose(f);
+        fclose(temp);
+        remove("DATABASE/TEMP.dat");
+        return;
+    }
+
+    afficher_auteur(A);
+
+    printf("\nVoulez-vous vraiment supprimer cet auteur ?\n");
             printf("1. Oui\n");
             printf("2. Non\n");
             printf("Votre choix : ");
@@ -303,4 +307,72 @@ void supprimer_auteur()
         remove("DATABASE/TEMP.dat");
         printf("\nAuteur introuvable.\n");
     }
+}
+
+void menu_auteurs()
+{
+    int choix;
+
+    do
+    {
+        printf("\n========== MENU AUTEURS ==========\n");
+        printf("1. Ajouter un auteur\n");
+        printf("2. Afficher la liste des auteurs\n");
+        printf("3. Afficher les details d'un auteur\n");   // <-- nouvelle ligne
+        printf("4. Modifier un auteur\n");
+        printf("5. Supprimer un auteur\n");
+        printf("0. Retour au menu principal\n");
+        printf("Votre choix : ");
+        scanf("%d", &choix);
+
+        switch (choix)
+        {
+            case 1: ajout_auteur(); break;
+            case 2: afficher_liste_auteurs(); break;
+            case 3: rechercher_auteur(); break;   // <-- nouvelle ligne
+            case 4: modifier_auteur(); break;
+            case 5: supprimer_auteur(); break;
+            case 0: printf("Retour...\n"); break;
+            default: printf("Choix invalide.\n");
+        }
+
+    } while (choix != 0);
+}
+
+void rechercher_auteur()
+{
+    FILE *f;
+    AUTHORS A;
+    int id;
+    int trouve = 0;
+
+    f = fopen("DATABASE/AUTHORS.dat", "rb");
+
+    if (f == NULL)
+    {
+        printf("\nAucun auteur enregistre.\n");
+        return;
+    }
+
+    afficher_liste_auteurs();
+
+    printf("\nEntrer l'ID de l'auteur a afficher : ");
+    scanf("%d", &id);
+
+    while (fread(&A, sizeof(AUTHORS), 1, f) == 1)
+    {
+        if (A.id == id)
+        {
+            trouve = 1;
+            afficher_auteur(A);
+            break;
+        }
+    }
+
+    if (!trouve)
+    {
+        printf("\nAuteur introuvable.\n");
+    }
+
+    fclose(f);
 }
