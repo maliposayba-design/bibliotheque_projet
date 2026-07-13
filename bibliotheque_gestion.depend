@@ -1,4 +1,5 @@
 # depslib dependency file v1.0
+<<<<<<< HEAD
 1783967331 source:c:\cours\langage c\projets_langage_c\bibliotheque_gestion\categories.c
 	<stdio.h>
 	"categories.h"
@@ -27,4 +28,19 @@
 	<stdio.h>
 	<string.h>
 	"books.h"
+=======
+1783961191 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\main.c
+	<stdio.h>
+	<stdlib.h>
+	"USERS.h"
+
+1783959832 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\users.h
+
+1783961408 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\users.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"USERS.h"
+>>>>>>> laye
 

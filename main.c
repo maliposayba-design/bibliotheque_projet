@@ -1,4 +1,5 @@
 #include <stdio.h>
+<<<<<<< HEAD
 #include "authors.h"
 #include "categories.h"
 #include "books.h"
@@ -29,6 +30,17 @@ int main()
         }
 
     } while (choix != 0);
+=======
+#include <stdlib.h>
+#include "USERS.h"
+int main()
+{
+    printf("Hello world!\n");
+     //ajouterUtilisateur();
+    afficherUtilisateurs();
+    supprimer_utilisateur();
+    //connexion();
+>>>>>>> laye
 
     return 0;
 }
