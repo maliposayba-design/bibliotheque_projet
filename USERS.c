@@ -251,6 +251,7 @@ void supprimer_utilisateur(){
     User u;
     int id;
     int trouve = 0;
+    int a;
     int confirmation;
 
     f=fopen("DATABASE/USERS.dat","rb");
@@ -264,22 +265,70 @@ void supprimer_utilisateur(){
         return;
     }
     do{
-        printf("Entre l'id de l'utilisateur que vous voulez supprimer");
+        printf("\nEntre l'id de l'utilisateur que vous voulez supprimer:");
         scanf("%d",&id);
+
+        a= recherche_id(id);
+
+        if(a==0){
+            printf("\nl'id que vous avez entrer n'existe pas");
+        }
+    }while(a==0);
+
+     while(fread(&u, sizeof(User), 1, f) == 1){
+        if (u.id == id){
+
+            printf("\nID : %d",u.id);
+            printf("\nNom : %s",u.nom);
+            printf("\nPrenom : %s",u.prenom);
+
+            printf("\nVoulez-vous supprimer cette utilisateur?\n");
+            printf("1. Oui\n");
+            printf("2. Non\n");
+            do{
+                 printf("Votre choix :");
+                scanf("%d", &confirmation);
+            }while(confirmation != 1 && confirmation != 2);
+
+
+            if (confirmation == 1)
+            {
+                trouve = 1;
+                printf("\nUtilisateur supprime avec succes.\n");
+                continue;
+            }
+        }
+
+        fwrite(&u, sizeof(User), 1, temp);
     }
-
-
+    fclose(f);
+    fclose(temp);
+    if (trouve){
+        remove("DATABASE/USERS.dat");
+        rename("DATABASE/TEMP.dat", "DATABASE/USERS.dat");
+    }else{
+        remove("DATABASE/TEMP.dat");
+    }
 
 }
 
 int recherche_id(int id){
-    File *f;
+    FILE *f;
     User u;
+
 
     f=fopen("DATABASE/USERS.dat","rb");
 
     if(f== NULL){
         printf("erreur lors de l'ouverture du fichier U");
-        return;
+        return 0;
     }
+    while(fread(&u,sizeof(User),1,f)){
+        if(u.id == id){
+            fclose(f);
+            return u.id;
+          }
+    }
+    fclose(f);
+    return 0;
 }

@@ -4,8 +4,9 @@
 int main()
 {
     printf("Hello world!\n");
-     ajouterUtilisateur();
-    //afficherUtilisateurs();
+     //ajouterUtilisateur();
+    afficherUtilisateurs();
+    supprimer_utilisateur();
     //connexion();
 
     return 0;

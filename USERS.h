@@ -21,6 +21,7 @@ void ajouterUtilisateur();
 void afficherUtilisateurs();
 int login_existe(char login[]);
 void supprimer_utilisateur();
+int recherche_id(int);
 int connexion();
 void menuAdmin();
 void menuUser();
