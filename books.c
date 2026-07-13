@@ -185,6 +185,16 @@ void saisir_livre(BOOK *L)
 
     L->nb_disponible = L->nb_total_exemplaires;
 
+    do
+{
+    printf("Nombre de pages : ");
+    scanf("%d", &L->nb_pages);
+
+    if (L->nb_pages <= 0)
+        printf("Le nombre de pages doit etre superieur a 0.\n");
+
+} while (L->nb_pages <= 0);
+
     printf("Emplacement dans la bibliotheque : ");
     scanf(" %[^\n]", L->emplacement);
 
@@ -216,11 +226,30 @@ void enregistrer_livre(BOOK L)
 void ajout_livre()
 {
     BOOK L;
+    FILE *f;
+    AUTHORS A_test;
+    CATEGORY C_test;
+
+    f = fopen("DATABASE/AUTHORS.dat", "rb");
+    if (f == NULL || fread(&A_test, sizeof(AUTHORS), 1, f) != 1)
+    {
+        printf("\nAucun auteur enregistre. Veuillez d'abord ajouter un auteur.\n");
+        if (f != NULL) fclose(f);
+        return;
+    }
+    fclose(f);
+
+    f = fopen("DATABASE/CATEGORIES.dat", "rb");
+    if (f == NULL || fread(&C_test, sizeof(CATEGORY), 1, f) != 1)
+    {
+        printf("\nAucune categorie enregistree. Veuillez d'abord ajouter une categorie.\n");
+        if (f != NULL) fclose(f);
+        return;
+    }
+    fclose(f);
 
     L.id = generer_id_livre();
-
     saisir_livre(&L);
-
     enregistrer_livre(L);
 
     printf("\nLivre ajoute avec succes !\n");
@@ -328,9 +357,10 @@ void modifier_livre()
             printf("6. Annee de publication\n");
             printf("7. Langue\n");
             printf("8. Nombre total d'exemplaires\n");
-            printf("9. Emplacement\n");
-            printf("10. Resume\n");
-            printf("11. Tout modifier\n");
+            printf("9. Nombre de pages\n");
+            printf("10. Emplacement\n");
+            printf("11. Resume\n");
+            printf("12. Tout modifier\n");
 
             printf("\nVotre choix : ");
             scanf("%d", &choix);
@@ -417,16 +447,27 @@ void modifier_livre()
                     break;
 
                 case 9:
+                    do
+                      {
+                        printf("Nombre de pages : ");
+                        scanf("%d", &L.nb_pages);
+
+                        if (L.nb_pages <= 0)
+                        printf("Le nombre de pages doit etre superieur a 0.\n");
+
+                        } while (L.nb_pages <= 0);
+                      break;
+                case 10:
                     printf("Nouvel emplacement : ");
                     scanf(" %[^\n]", L.emplacement);
                     break;
 
-                case 10:
+                case 11:
                     printf("Nouveau resume : ");
                     scanf(" %[^\n]", L.resume);
                     break;
 
-                case 11:
+                case 12:
                     saisir_livre(&L);
                     break;
 

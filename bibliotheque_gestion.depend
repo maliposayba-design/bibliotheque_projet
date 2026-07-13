@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1783966306 source:c:\cours\langage c\projets_langage_c\bibliotheque_gestion\categories.c
+1783967331 source:c:\cours\langage c\projets_langage_c\bibliotheque_gestion\categories.c
 	<stdio.h>
 	"categories.h"
 
@@ -18,8 +18,13 @@
 	"authors.h"
 	"categories.h"
 
-1783966665 source:c:\cours\langage c\projets_langage_c\bibliotheque_gestion\authors.c
+1783967256 source:c:\cours\langage c\projets_langage_c\bibliotheque_gestion\authors.c
 	<stdio.h>
 	"books.h"
 	"authors.h"
+
+1783970017 source:c:\cours\langage c\projets_langage_c\bibliotheque_gestion\books.c
+	<stdio.h>
+	<string.h>
+	"books.h"
 
