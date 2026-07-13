@@ -312,7 +312,7 @@ void supprimer_utilisateur(){
     fclose(temp);
     if (trouve){
         remove("DATABASE/USERS.dat");
-        rename("DATABASE/TEMP.dat", "DATABASE/USERS.dat");
+        rename("DATABASE/TEMP.dat","DATABASE/USERS.dat");
     }else{
         remove("DATABASE/TEMP.dat");
     }
