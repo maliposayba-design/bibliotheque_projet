@@ -263,7 +263,23 @@ void supprimer_utilisateur(){
         printf("erreur lors de l'ouverture du fichier T");
         return;
     }
+    do{
+        printf("Entre l'id de l'utilisateur que vous voulez supprimer");
+        scanf("%d",&id);
+    }
+
+
 
 }
 
+int recherche_id(int id){
+    File *f;
+    User u;
 
+    f=fopen("DATABASE/USERS.dat","rb");
+
+    if(f== NULL){
+        printf("erreur lors de l'ouverture du fichier U");
+        return;
+    }
+}
