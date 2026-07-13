@@ -121,7 +121,6 @@ void saisir_livre(BOOK *L)
 
     do
     {
-        printf("\n========== LISTE DES AUTEURS ==========\n");
         afficher_liste_auteurs();
 
         printf("\nEntrer l'ID de l'auteur : ");
@@ -138,7 +137,6 @@ void saisir_livre(BOOK *L)
 
     do
     {
-        printf("\n========== LISTE DES CATEGORIES ==========\n");
         afficher_liste_categorie();
 
         printf("\nEntrer l'ID de la categorie : ");

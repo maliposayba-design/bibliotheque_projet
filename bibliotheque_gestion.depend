@@ -18,12 +18,12 @@
 	"authors.h"
 	"categories.h"
 
-1783967256 source:c:\cours\langage c\projets_langage_c\bibliotheque_gestion\authors.c
+1783971722 source:c:\cours\langage c\projets_langage_c\bibliotheque_gestion\authors.c
 	<stdio.h>
 	"books.h"
 	"authors.h"
 
-1783970017 source:c:\cours\langage c\projets_langage_c\bibliotheque_gestion\books.c
+1783971791 source:c:\cours\langage c\projets_langage_c\bibliotheque_gestion\books.c
 	<stdio.h>
 	<string.h>
 	"books.h"

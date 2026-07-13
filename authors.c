@@ -318,7 +318,7 @@ void menu_auteurs()
         printf("\n========== MENU AUTEURS ==========\n");
         printf("1. Ajouter un auteur\n");
         printf("2. Afficher la liste des auteurs\n");
-        printf("3. Afficher les details d'un auteur\n");   // <-- nouvelle ligne
+        printf("3. Afficher les details d'un auteur\n");
         printf("4. Modifier un auteur\n");
         printf("5. Supprimer un auteur\n");
         printf("0. Retour au menu principal\n");
@@ -329,7 +329,7 @@ void menu_auteurs()
         {
             case 1: ajout_auteur(); break;
             case 2: afficher_liste_auteurs(); break;
-            case 3: rechercher_auteur(); break;   // <-- nouvelle ligne
+            case 3: rechercher_auteur(); break;
             case 4: modifier_auteur(); break;
             case 5: supprimer_auteur(); break;
             case 0: printf("Retour...\n"); break;
