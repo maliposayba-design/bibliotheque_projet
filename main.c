@@ -4,10 +4,10 @@
 int main()
 {
     printf("Hello world!\n");
-     //ajouterUtilisateur();
+     ajouterUtilisateur();
     afficherUtilisateurs();
     supprimer_utilisateur();
-    //connexion();
+    connexion();
 
     return 0;
 }
