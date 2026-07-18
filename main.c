@@ -6,14 +6,11 @@
 
 int main()
 {
-<<<<<<< HEAD
     printf("Hello world!\n");
-     //ajouterUtilisateur();
+    printf("hello word\n");
+    //ajouterUtilisateur();
     afficherUtilisateurs();
     supprimer_utilisateur();
     //connexion();
-=======
-    printf("hello word")
->>>>>>> feature/reservation
     return 0;
 }
