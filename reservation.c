@@ -1,5 +1,5 @@
-#include "reservations.h"
-#include "rapports.h"
+#include "reservation.h"
+#include "rapport.h"
 #include <stdio.h>
 #include <string.h>
 #include<time.h>
