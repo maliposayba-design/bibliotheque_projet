@@ -90,8 +90,7 @@ int compter_livres_disponibles() {
 }
 
 int compter_reservations_totales() {
-    int nb;
-    RESERVATION R
+    RESERVATION R;
     FILE* f = fopen("DATABASE/RESERVATIONS.dat", "rb");
     if (f == NULL) return 0;
 
