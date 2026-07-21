@@ -29,7 +29,6 @@ void afficher_menu_principal() {
 
 int main() {
     system("title Bibliotheque E-LIBRARY ISI DAKAR");
-    system("color 0A");
 
     printf("╔═══════════════════════════════════════════════════════╗\n");
     printf("║     BIENVENUE A LA BIBLIOTHEQUE E-LIBRARY ISI         ║\n");
