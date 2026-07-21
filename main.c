@@ -12,7 +12,6 @@
 #include "rapports.h"
 
 void afficher_menu_principal() {
-    printf("\n");
     printf("==================BIBLIOTHEQUE E-LIBRARY ISI DAKAR==================\n");
     printf("1. Gestion des utilisateurs\n");
     printf("2. Gestion des auteurs\n");
