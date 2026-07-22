@@ -152,3 +152,44 @@
 	<stdlib.h>
 	<time.h>
 
+1784760140 source:c:\users\user\desktop\bibliotheque_projet\emprunts.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"Penalites.h"
+	"Emprunt.h"
+	"Retours.h"
+	"books.h"
+	"USERS.h"
+
+1784760140 c:\users\user\desktop\bibliotheque_projet\penalites.h
+
+1784760140 c:\users\user\desktop\bibliotheque_projet\emprunt.h
+	"books.h"
+	"USERS.h"
+
+1784760140 c:\users\user\desktop\bibliotheque_projet\retours.h
+	"Emprunt.h"
+	"Penalites.h"
+
+1784760140 source:c:\users\user\desktop\bibliotheque_projet\penalites.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Penalites.h"
+	"Emprunt.h"
+	"books.h"
+	"USERS.h"
+
+1784760140 source:c:\users\user\desktop\bibliotheque_projet\retours.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"Retours.h"
+	"Emprunt.h"
+	"books.h"
+	"USERS.h"
+	"Penalites.h"
+
