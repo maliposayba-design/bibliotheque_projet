@@ -1,5 +1,6 @@
 #include "statistiques.h"
 #include "reservation.h"
+#include "structure.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -32,9 +33,7 @@ void* lire_fichier_stats(const char* nom, size_t taille, int* nb) {
 int compter_utilisateurs() {
     int nb;
     User* users = lire_fichier_stats("DATABASE/USERS.dat", sizeof(User), &nb);
-    if (users == NULL){
-       return 0;
-    }
+    if (users == NULL) return 0;
     free(users);
     return nb;
 }
@@ -48,36 +47,24 @@ int compter_livres() {
 }
 
 int compter_emprunts_en_cours() {
-    FILE *f;
+    int nb;
+    EMPRUNT* emprunts = lire_fichier_stats("DATABASE/BORROWS.dat", sizeof(EMPRUNT), &nb);
+    if (emprunts == NULL) return 0;
+
     int count = 0;
-    struct {
-        int id;
-        char numEmprunt[30];
-        int idUtilisateur;
-        int idLivre;
-        char dateEmprunt[20];
-        char dateRetourPrevue[20];
-        char etat[20];
-    } E;
-
-    f = fopen("DATABASE/BORROWS.dat", "rb");
-    if (f == NULL) return 0;
-
-    while (fread(&E, sizeof(E), 1, f) == 1) {
-        if (strcmp(E.etat, "EN_COURS") == 0) {
+    for (int i = 0; i < nb; i++) {
+        if (strcmp(emprunts[i].etat, "EN_COURS") == 0) {
             count++;
         }
     }
-    fclose(f);
+    free(emprunts);
     return count;
 }
 
 int compter_livres_disponibles() {
     int nb;
     BOOK* livres = lire_fichier_stats("DATABASE/BOOKS.dat", sizeof(BOOK), &nb);
-    if (livres == NULL){
-       return 0;
-    }
+    if (livres == NULL) return 0;
 
     int count = 0;
     for (int i = 0; i < nb; i++) {
@@ -103,26 +90,17 @@ int compter_reservations_totales() {
 }
 
 int compter_penalites_impayees() {
-    FILE *f;
+    int nb;
+    PENALITE* penalites = lire_fichier_stats("DATABASE/PENALTIES.dat", sizeof(PENALITE), &nb);
+    if (penalites == NULL) return 0;
+
     int count = 0;
-    struct {
-        int id;
-        int idUtilisateur;
-        int idEmprunt;
-        float montant;
-        char dateCalcul[20];
-        int payee;
-    } P;
-
-    f = fopen("DATABASE/PENALTIES.dat", "rb");
-    if (f == NULL) return 0;
-
-    while (fread(&P, sizeof(P), 1, f) == 1) {
-        if (P.payee == 0) {
+    for (int i = 0; i < nb; i++) {
+        if (penalites[i].payee == 0) {
             count++;
         }
     }
-    fclose(f);
+    free(penalites);
     return count;
 }
 
@@ -130,27 +108,17 @@ int compter_emprunts_du_jour() {
     char today[20];
     strcpy(today, getdate());
 
-    FILE *f;
+    int nb;
+    EMPRUNT* emprunts = lire_fichier_stats("DATABASE/BORROWS.dat", sizeof(EMPRUNT), &nb);
+    if (emprunts == NULL) return 0;
+
     int count = 0;
-    struct {
-        int id;
-        char numEmprunt[30];
-        int idUtilisateur;
-        int idLivre;
-        char dateEmprunt[20];
-        char dateRetourPrevue[20];
-        char etat[20];
-    } E;
-
-    f = fopen("DATABASE/BORROWS.dat", "rb");
-    if (f == NULL) return 0;
-
-    while (fread(&E, sizeof(E), 1, f) == 1) {
-        if (strncmp(E.dateEmprunt, today, 10) == 0) {
+    for (int i = 0; i < nb; i++) {
+        if (strncmp(emprunts[i].dateEmprunt, today, 10) == 0) {
             count++;
         }
     }
-    fclose(f);
+    free(emprunts);
     return count;
 }
 
@@ -158,25 +126,17 @@ int compter_retours_du_jour() {
     char today[20];
     strcpy(today, getdate());
 
-    FILE *f;
+    int nb;
+    RETOUR* retours = lire_fichier_stats("DATABASE/RETURNS.dat", sizeof(RETOUR), &nb);
+    if (retours == NULL) return 0;
+
     int count = 0;
-    struct {
-        int id;
-        int idEmprunt;
-        char dateRetourEffective[20];
-        int enRetard;
-        float montantPenalite;
-    } R;
-
-    f = fopen("DATABASE/RETURNS.dat", "rb");
-    if (f == NULL) return 0;
-
-    while (fread(&R, sizeof(R), 1, f) == 1) {
-        if (strncmp(R.dateRetourEffective, today, 10) == 0) {
+    for (int i = 0; i < nb; i++) {
+        if (strncmp(retours[i].dateRetourEffective, today, 10) == 0) {
             count++;
         }
     }
-    fclose(f);
+    free(retours);
     return count;
 }
 
@@ -184,13 +144,11 @@ int compter_reservations_du_jour() {
     char today[20];
     strcpy(today, getdate());
 
-    FILE *f;
-    int count = 0;
     RESERVATION R;
-
-    f = fopen("DATABASE/RESERVATIONS.dat", "rb");
+    FILE* f = fopen("DATABASE/RESERVATIONS.dat", "rb");
     if (f == NULL) return 0;
 
+    int count = 0;
     while (fread(&R, sizeof(RESERVATION), 1, f) == 1) {
         if (strncmp(R.dateReservation, today, 10) == 0) {
             count++;
@@ -222,26 +180,17 @@ int compter_penalites_du_jour() {
     char today[20];
     strcpy(today, getdate());
 
-    FILE *f;
+    int nb;
+    PENALITE* penalites = lire_fichier_stats("DATABASE/PENALTIES.dat", sizeof(PENALITE), &nb);
+    if (penalites == NULL) return 0;
+
     int count = 0;
-    struct {
-        int id;
-        int idUtilisateur;
-        int idEmprunt;
-        float montant;
-        char dateCalcul[20];
-        int payee;
-    } P;
-
-    f = fopen("DATABASE/PENALTIES.dat", "rb");
-    if (f == NULL) return 0;
-
-    while (fread(&P, sizeof(P), 1, f) == 1) {
-        if (strncmp(P.dateCalcul, today, 10) == 0) {
+    for (int i = 0; i < nb; i++) {
+        if (strncmp(penalites[i].dateCalcul, today, 10) == 0) {
             count++;
         }
     }
-    fclose(f);
+    free(penalites);
     return count;
 }
 
@@ -249,33 +198,23 @@ float montant_penalites_du_jour() {
     char today[20];
     strcpy(today, getdate());
 
-    FILE *f;
+    int nb;
+    PENALITE* penalites = lire_fichier_stats("DATABASE/PENALTIES.dat", sizeof(PENALITE), &nb);
+    if (penalites == NULL) return 0.0;
+
     float total = 0;
-    struct {
-        int id;
-        int idUtilisateur;
-        int idEmprunt;
-        float montant;
-        char dateCalcul[20];
-        int payee;
-    } P;
-
-    f = fopen("DATABASE/PENALTIES.dat", "rb");
-    if (f == NULL) return 0.0;
-
-    while (fread(&P, sizeof(P), 1, f) == 1) {
-        if (strncmp(P.dateCalcul, today, 10) == 0) {
-            total += P.montant;
+    for (int i = 0; i < nb; i++) {
+        if (strncmp(penalites[i].dateCalcul, today, 10) == 0) {
+            total += penalites[i].montant;
         }
     }
-    fclose(f);
+    free(penalites);
     return total;
 }
 
 char* get_livre_le_plus_emprunte() {
     static char result[200] = "Aucun emprunt";
 
-    FILE *f;
     int nbLivres;
     BOOK* livres = lire_fichier_stats("DATABASE/BOOKS.dat", sizeof(BOOK), &nbLivres);
     if (livres == NULL) return result;
@@ -286,27 +225,18 @@ char* get_livre_le_plus_emprunte() {
         return result;
     }
 
-    struct {
-        int id;
-        char numEmprunt[30];
-        int idUtilisateur;
-        int idLivre;
-        char dateEmprunt[20];
-        char dateRetourPrevue[20];
-        char etat[20];
-    } E;
-
-    f = fopen("DATABASE/BORROWS.dat", "rb");
-    if (f != NULL) {
-        while (fread(&E, sizeof(E), 1, f) == 1) {
+    int nbEmprunts;
+    EMPRUNT* emprunts = lire_fichier_stats("DATABASE/BORROWS.dat", sizeof(EMPRUNT), &nbEmprunts);
+    if (emprunts != NULL) {
+        for (int i = 0; i < nbEmprunts; i++) {
             for (int j = 0; j < nbLivres; j++) {
-                if (livres[j].id == E.idLivre) {
+                if (livres[j].id == emprunts[i].idLivre) {
                     compteurs[j]++;
                     break;
                 }
             }
         }
-        fclose(f);
+        free(emprunts);
     }
 
     int max = 0, idMax = 0;
@@ -348,31 +278,22 @@ char* get_utilisateur_le_plus_actif() {
         return result;
     }
 
-    struct {
-        int id;
-        char numEmprunt[30];
-        int idUtilisateur;
-        int idLivre;
-        char dateEmprunt[20];
-        char dateRetourPrevue[20];
-        char etat[20];
-    } E;
-
-    FILE* f = fopen("DATABASE/BORROWS.dat", "rb");
-    if (f != NULL) {
-        while (fread(&E, sizeof(E), 1, f) == 1){
-            for (int j = 0; j < nbUsers; j++){
-                if (users[j].id == E.idUtilisateur) {
+    int nbEmprunts;
+    EMPRUNT* emprunts = lire_fichier_stats("DATABASE/BORROWS.dat", sizeof(EMPRUNT), &nbEmprunts);
+    if (emprunts != NULL) {
+        for (int i = 0; i < nbEmprunts; i++) {
+            for (int j = 0; j < nbUsers; j++) {
+                if (users[j].id == emprunts[i].idUtilisateur) {
                     compteurs[j]++;
                     break;
                 }
             }
         }
-        fclose(f);
+        free(emprunts);
     }
 
     int max = 0, idMax = 0;
-    for (int i = 0; i < nbUsers; i++){
+    for (int i = 0; i < nbUsers; i++) {
         if (compteurs[i] > max) {
             max = compteurs[i];
             idMax = users[i].id;
@@ -398,46 +319,37 @@ char* get_utilisateur_le_plus_actif() {
 }
 
 float get_montant_total_penalites() {
-    FILE *f;
+    int nb;
+    PENALITE* penalites = lire_fichier_stats("DATABASE/PENALTIES.dat", sizeof(PENALITE), &nb);
+    if (penalites == NULL) return 0.0;
+
     float total = 0;
-    struct {
-        int id;
-        int idUtilisateur;
-        int idEmprunt;
-        float montant;
-        char dateCalcul[20];
-        int payee;
-    } P;
-
-    f = fopen("DATABASE/PENALTIES.dat", "rb");
-    if (f == NULL) return 0.0;
-
-    while (fread(&P, sizeof(P), 1, f) == 1) {
-        total += P.montant;
+    for (int i = 0; i < nb; i++) {
+        total += penalites[i].montant;
     }
-    fclose(f);
+    free(penalites);
     return total;
 }
 
 void afficher_statistiques_generales() {
     printf("===================STATISTIQUES GENERALES===================\n");
-    printf("Total utilisateurs    : %d\n", compter_utilisateurs());
-    printf("Total livres          : %d\n", compter_livres());
-    printf("Emprunts en cours     : %d\n", compter_emprunts_en_cours());
-    printf("Livres disponibles    : %d\n", compter_livres_disponibles());
-    printf("Reservations totales  : %d\n", compter_reservations_totales());
-    printf("Penalites impayees    : %d\n", compter_penalites_impayees());
+    printf("Total utilisateurs : %d\n", compter_utilisateurs());
+    printf("Total livres : %d\n", compter_livres());
+    printf("Emprunts en cours : %d\n", compter_emprunts_en_cours());
+    printf("Livres disponibles : %d\n", compter_livres_disponibles());
+    printf("Reservations totales : %d\n", compter_reservations_totales());
+    printf("Penalites impayees : %d\n", compter_penalites_impayees());
 }
 
 void afficher_statistiques_journalieres() {
     printf("==================STATISTIQUES DU JOUR==================\n");
-    printf("Date                 : %s\n", getdate());
-    printf("Emprunts             : %d\n", compter_emprunts_du_jour());
-    printf("Retours              : %d\n", compter_retours_du_jour());
-    printf("Reservations         : %d\n", compter_reservations_du_jour());
+    printf("Date : %s\n", getdate());
+    printf("Emprunts : %d\n", compter_emprunts_du_jour());
+    printf("Retours : %d\n", compter_retours_du_jour());
+    printf("Reservations : %d\n", compter_reservations_du_jour());
     printf("Nouveaux utilisateurs: %d\n", compter_nouveaux_utilisateurs_du_jour());
-    printf("Penalites            : %d\n", compter_penalites_du_jour());
-    printf("Montant penalites    : %.2f FCFA\n", montant_penalites_du_jour());
+    printf("Penalites : %d\n", compter_penalites_du_jour());
+    printf("Montant penalites : %.2f FCFA\n", montant_penalites_du_jour());
     printf("============================================\n");
 }
 

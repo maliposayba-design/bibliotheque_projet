@@ -1,6 +1,7 @@
 #include "rapports.h"
 #include "statistiques.h"
 #include "reservation.h"
+#include "structure.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -71,49 +72,44 @@ void afficher_historique() {
 }
 
 void generer_recu_emprunt(int idEmprunt) {
-    struct {
-        int id;
-        char numEmprunt[30];
-        int idUtilisateur;
-        int idLivre;
-        char dateEmprunt[20];
-        char dateRetourPrevue[20];
-        char etat[20];
-    } E;
-
-    FILE* f = fopen("DATABASE/BORROWS.dat", "rb");
-    if (f == NULL) {
+    int nb;
+    EMPRUNT* emprunts = lire_fichier_rapport("DATABASE/BORROWS.dat", sizeof(EMPRUNT), &nb);
+    if (emprunts == NULL) {
         printf("Aucun emprunt trouve.\n");
         return;
     }
 
-    int trouve = 0;
-    while (fread(&E, sizeof(E), 1, f) == 1) {
-        if (E.id == idEmprunt) {
-            trouve = 1;
+    EMPRUNT* E = NULL;
+    for (int i = 0; i < nb; i++) {
+        if (emprunts[i].id == idEmprunt) {
+            E = &emprunts[i];
             break;
         }
     }
-    fclose(f);
 
-    if (!trouve) {
+    if (E == NULL) {
         printf("Emprunt ID %d inexistant.\n", idEmprunt);
+        free(emprunts);
         return;
     }
 
     int nbLivres;
     BOOK* livres = lire_fichier_rapport("DATABASE/BOOKS.dat", sizeof(BOOK), &nbLivres);
-    if (livres == NULL) return;
+    if (livres == NULL) {
+        free(emprunts);
+        return;
+    }
 
     BOOK* livre = NULL;
     for (int i = 0; i < nbLivres; i++) {
-        if (livres[i].id == E.idLivre) {
+        if (livres[i].id == E->idLivre) {
             livre = &livres[i];
             break;
         }
     }
 
     if (livre == NULL) {
+        free(emprunts);
         free(livres);
         return;
     }
@@ -121,19 +117,21 @@ void generer_recu_emprunt(int idEmprunt) {
     int nbUsers;
     User* users = lire_fichier_rapport("DATABASE/USERS.dat", sizeof(User), &nbUsers);
     if (users == NULL) {
+        free(emprunts);
         free(livres);
         return;
     }
 
     User* user = NULL;
     for (int i = 0; i < nbUsers; i++) {
-        if (users[i].id == E.idUtilisateur) {
+        if (users[i].id == E->idUtilisateur) {
             user = &users[i];
             break;
         }
     }
 
     if (user == NULL) {
+        free(emprunts);
         free(livres);
         free(users);
         return;
@@ -141,12 +139,12 @@ void generer_recu_emprunt(int idEmprunt) {
 
     char nomFichier[200];
     char jour[3], mois[3], annee[5], heure[3], minute[3], seconde[3];
-    strncpy(jour, E.dateEmprunt, 2);
-    strncpy(mois, E.dateEmprunt + 3, 2);
-    strncpy(annee, E.dateEmprunt + 6, 4);
-    strncpy(heure, E.dateEmprunt + 11, 2);
-    strncpy(minute, E.dateEmprunt + 14, 2);
-    strncpy(seconde, E.dateEmprunt + 17, 2);
+    strncpy(jour, E->dateEmprunt, 2);
+    strncpy(mois, E->dateEmprunt + 3, 2);
+    strncpy(annee, E->dateEmprunt + 6, 4);
+    strncpy(heure, E->dateEmprunt + 11, 2);
+    strncpy(minute, E->dateEmprunt + 14, 2);
+    strncpy(seconde, E->dateEmprunt + 17, 2);
 
     jour[2] = '\0';
     mois[2] = '\0';
@@ -155,11 +153,13 @@ void generer_recu_emprunt(int idEmprunt) {
     minute[2] = '\0';
     seconde[2] = '\0';
 
-    sprintf(nomFichier, "REPORTS/BORROWS/BORROW_%s%s%s%s%s%s_%s.txt",annee, mois, jour, heure, minute, seconde, user->login);
+    sprintf(nomFichier, "REPORTS/BORROWS/BORROW_%s%s%s%s%s%s_%s.txt",
+            annee, mois, jour, heure, minute, seconde, user->login);
 
-    f = fopen(nomFichier, "w");
+    FILE* f = fopen(nomFichier, "w");
     if (f == NULL) {
         printf("Erreur : Impossible de creer le fichier.\n");
+        free(emprunts);
         free(livres);
         free(users);
         return;
@@ -169,10 +169,10 @@ void generer_recu_emprunt(int idEmprunt) {
     fprintf(f, "          BIBLIOTHEQUE E-LIBRARY ISI\n");
     fprintf(f, "              RECU D'EMPRUNT\n");
     fprintf(f, "============================================\n\n");
-    fprintf(f, "Numero d'emprunt: %s\n", E.numEmprunt);
+    fprintf(f, "Numero d'emprunt: %s\n", E->numEmprunt);
     fprintf(f, "Lecteur : %s %s (%s)\n", user->prenom, user->nom, user->login);
-    fprintf(f, "Date d'emprunt : %s\n", E.dateEmprunt);
-    fprintf(f, "Date prevue retour: %s\n\n", E.dateRetourPrevue);
+    fprintf(f, "Date d'emprunt : %s\n", E->dateEmprunt);
+    fprintf(f, "Date prevue retour: %s\n\n", E->dateRetourPrevue);
     fprintf(f, "Livre emprunte    : %s\n", livre->titre);
 
     int nbAuteurs;
@@ -205,80 +205,74 @@ void generer_recu_emprunt(int idEmprunt) {
     char detail[200];
     sprintf(detail, "Recu emprunt genere pour %s - Livre: %s", user->login, livre->titre);
     ecrire_historique("Generation recu emprunt", detail);
+
+    free(emprunts);
     free(livres);
     free(users);
 }
 
 void generer_recu_retour(int idRetour) {
-    struct {
-        int id;
-        int idEmprunt;
-        char dateRetourEffective[20];
-        int enRetard;
-        float montantPenalite;
-    } R;
-
-    FILE* f = fopen("DATABASE/RETURNS.dat", "rb");
-    if (f == NULL) {
+    int nb;
+    RETOUR* retours = lire_fichier_rapport("DATABASE/RETURNS.dat", sizeof(RETOUR), &nb);
+    if (retours == NULL) {
         printf("Aucun retour trouve.\n");
         return;
     }
 
-    int trouve = 0;
-    while (fread(&R, sizeof(R), 1, f) == 1) {
-        if (R.id == idRetour) {
-            trouve = 1;
+    RETOUR* R = NULL;
+    for (int i = 0; i < nb; i++) {
+        if (retours[i].id == idRetour) {
+            R = &retours[i];
             break;
         }
     }
-    fclose(f);
 
-    if (!trouve) {
+    if (R == NULL) {
         printf("Retour ID %d inexistant.\n", idRetour);
+        free(retours);
         return;
     }
 
-    struct {
-        int id;
-        char numEmprunt[30];
-        int idUtilisateur;
-        int idLivre;
-        char dateEmprunt[20];
-        char dateRetourPrevue[20];
-        char etat[20];
-    } E;
-
-    f = fopen("DATABASE/BORROWS.dat", "rb");
-    if (f == NULL) {
+    int nbEmprunts;
+    EMPRUNT* emprunts = lire_fichier_rapport("DATABASE/BORROWS.dat", sizeof(EMPRUNT), &nbEmprunts);
+    if (emprunts == NULL) {
+        free(retours);
         return;
     }
 
-    int trouveEmprunt = 0;
-    while (fread(&E, sizeof(E), 1, f) == 1) {
-        if (E.id == R.idEmprunt) {
-            trouveEmprunt = 1;
+    EMPRUNT* E = NULL;
+    for (int i = 0; i < nbEmprunts; i++) {
+        if (emprunts[i].id == R->idEmprunt) {
+            E = &emprunts[i];
             break;
         }
     }
-    fclose(f);
 
-    if (!trouveEmprunt) {
+    if (E == NULL) {
+        free(retours);
+        free(emprunts);
         return;
     }
 
     int nbLivres;
     BOOK* livres = lire_fichier_rapport("DATABASE/BOOKS.dat", sizeof(BOOK), &nbLivres);
-    if (livres == NULL) return;
+    if (livres == NULL) {
+        free(retours);
+        free(emprunts);
+        return;
+    }
 
     BOOK* livre = NULL;
     for (int i = 0; i < nbLivres; i++) {
-        if (livres[i].id == E.idLivre) {
+        if (livres[i].id == E->idLivre) {
             livre = &livres[i];
             break;
         }
     }
 
     if (livre == NULL) {
+        free(retours);
+        free(emprunts);
         free(livres);
         return;
     }
@@ -286,19 +280,23 @@ void generer_recu_retour(int idRetour) {
     int nbUsers;
     User* users = lire_fichier_rapport("DATABASE/USERS.dat", sizeof(User), &nbUsers);
     if (users == NULL) {
+        free(retours);
+        free(emprunts);
         free(livres);
         return;
     }
 
     User* user = NULL;
     for (int i = 0; i < nbUsers; i++) {
-        if (users[i].id == E.idUtilisateur) {
+        if (users[i].id == E->idUtilisateur) {
             user = &users[i];
             break;
         }
     }
 
     if (user == NULL) {
+        free(retours);
+        free(emprunts);
         free(livres);
         free(users);
         return;
@@ -307,12 +305,12 @@ void generer_recu_retour(int idRetour) {
     char nomFichier[200];
     char jour[3], mois[3], annee[5], heure[3], minute[3], seconde[3];
 
-    strncpy(jour, R.dateRetourEffective, 2);
-    strncpy(mois, R.dateRetourEffective + 3, 2);
-    strncpy(annee, R.dateRetourEffective + 6, 4);
-    strncpy(heure, R.dateRetourEffective + 11, 2);
-    strncpy(minute, R.dateRetourEffective + 14, 2);
-    strncpy(seconde, R.dateRetourEffective + 17, 2);
+    strncpy(jour, R->dateRetourEffective, 2);
+    strncpy(mois, R->dateRetourEffective + 3, 2);
+    strncpy(annee, R->dateRetourEffective + 6, 4);
+    strncpy(heure, R->dateRetourEffective + 11, 2);
+    strncpy(minute, R->dateRetourEffective + 14, 2);
+    strncpy(seconde, R->dateRetourEffective + 17, 2);
     jour[2] = '\0';
     mois[2] = '\0';
     annee[4] = '\0';
@@ -320,10 +318,14 @@ void generer_recu_retour(int idRetour) {
     minute[2] = '\0';
     seconde[2] = '\0';
 
-    sprintf(nomFichier, "REPORTS/RETURNS/RETURN_%s%s%s%s%s%s_%s.txt",annee, mois, jour, heure, minute, seconde, user->login);
-    f = fopen(nomFichier, "w");
+    sprintf(nomFichier, "REPORTS/RETURNS/RETURN_%s%s%s%s%s%s_%s.txt",
+            annee, mois, jour, heure, minute, seconde, user->login);
+
+    FILE* f = fopen(nomFichier, "w");
     if (f == NULL) {
         printf("Erreur : Impossible de creer le fichier.\n");
+        free(retours);
+        free(emprunts);
         free(livres);
         free(users);
         return;
@@ -333,17 +335,17 @@ void generer_recu_retour(int idRetour) {
     fprintf(f, "          BIBLIOTHEQUE E-LIBRARY ISI\n");
     fprintf(f, "              RECU DE RETOUR\n");
     fprintf(f, "============================================\n\n");
-    fprintf(f, "Numero d'emprunt : %s\n", E.numEmprunt);
+    fprintf(f, "Numero d'emprunt : %s\n", E->numEmprunt);
     fprintf(f, "Lecteur : %s %s (%s)\n", user->prenom, user->nom, user->login);
-    fprintf(f, "Date de retour : %s\n\n", R.dateRetourEffective);
+    fprintf(f, "Date de retour : %s\n\n", R->dateRetourEffective);
     fprintf(f, "Livre retourne : %s\n", livre->titre);
     fprintf(f, "ISBN : %s\n\n", livre->isbn);
 
-    if (R.enRetard) {
+    if (R->enRetard) {
         fprintf(f, "           RETARD DETECTE !\n");
         fprintf(f, "============================================\n");
-        fprintf(f, "Date prevue : %s\n", E.dateRetourPrevue);
-        fprintf(f, "Penalite : %.2f FCFA\n\n", R.montantPenalite);
+        fprintf(f, "Date prevue : %s\n", E->dateRetourPrevue);
+        fprintf(f, "Penalite : %.2f FCFA\n\n", R->montantPenalite);
         fprintf(f, "Merci de regler la penalite au plus vite.\n");
     } else {
         fprintf(f, "Retour dans les delais. Merci !\n");
@@ -356,6 +358,9 @@ void generer_recu_retour(int idRetour) {
     char detail[200];
     sprintf(detail, "Recu retour genere pour %s - Livre: %s", user->login, livre->titre);
     ecrire_historique("Generation recu retour", detail);
+
+    free(retours);
+    free(emprunts);
     free(livres);
     free(users);
 }
@@ -372,7 +377,7 @@ void generer_rapport_journalier() {
 
     sprintf(nomFichier, "REPORTS/DAILY/REPORT_%s.txt", dateFichier);
     FILE* f = fopen(nomFichier, "w");
-    if (f == NULL){
+    if (f == NULL) {
         printf("Erreur : Impossible de creer le rapport.\n");
         return;
     }
