@@ -70,7 +70,7 @@ void ajouterUtilisateur(){
 
     strcpy(u.etat,"ACTIF");
 
-    printf("Entre la date de creation : ");
+    printf("Entre la date de creation (jj/mm/aaaa) : ");
     scanf("%s",u.dateCreation);
 
     strcpy(u.derniereConnexion,"Aucune");
@@ -135,6 +135,10 @@ void afficherUtilisateurs(){
         printf("\nRole : %s",u.role);
 
         printf("\nEtat : %s",u.etat);
+
+        printf("\nDate de creation : %s",u.dateCreation);
+
+        printf("\nDerniere connexion : %s",u.derniereConnexion);
 
         printf("\n");
     }
@@ -210,6 +214,9 @@ int connexion(){
 
             printf("\nConnexion reussie.\n");
             printf("Bienvenue %s %s\n", u.prenom, u.nom);
+            printf("\nEntrez la date de derniere connexion (jj/mm/aaaa) : ");
+            scanf("%s", u.derniereConnexion);
+            
 
             if(strcmp(u.role, "ADMIN") == 0)
             {
