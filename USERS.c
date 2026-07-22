@@ -63,7 +63,7 @@ void ajouterUtilisateur(){
     scanf("%s", u.role);
 
     if(strcmp(u.role, "ADMIN") != 0 && strcmp(u.role, "USER") != 0){
-        printf("Le r�le doit �tre ADMIN ou USER uniquement.\n");
+        printf("Le role doit etre ADMIN ou USER uniquement.\n");
     }
     }while(strcmp(u.role, "ADMIN") != 0 && strcmp(u.role, "USER") != 0);
 
@@ -227,7 +227,7 @@ int connexion(){
 
     fclose(f);
     fclose(temp);
-    
+
     if (trouve){
         remove("DATABASE/USERS.dat");
         rename("DATABASE/TEMP.dat", "DATABASE/USERS.dat");
@@ -245,7 +245,7 @@ void menuAdmin()
     int choix;
 
     do{
-        
+
         printf("\nMenu Admin :\n");
         printf("1. Ajouter un utilisateur\n");
         printf("2. Afficher les utilisateurs\n");
@@ -278,24 +278,6 @@ void menuAdmin()
     }while(choix != 5);
 }
 
-void menuUser(){
-    int choix;
-    do{
-        printf("\nMenu Utilisateur :\n");
-        printf("1. connexion\n");
-        printf("Votre choix : ");
-        scanf("%d", &choix);
-
-        switch(choix)
-        {
-            case 1:
-                connexion();
-                break;
-            default:
-                printf("Choix invalide.\n");
-        }
-    }while(choix != 1);
-}
 
 void supprimer_utilisateur(){
     FILE *f;
@@ -357,7 +339,7 @@ void supprimer_utilisateur(){
     fclose(temp);
     if (trouve){
         remove("DATABASE/USERS.dat");
-        rename("DATABASE/TEMP.dat", "DATABASE/USERS.dat");
+        rename("DATABASE/TEMP.dat","DATABASE/USERS.dat");
     }else{
         remove("DATABASE/TEMP.dat");
     }
@@ -455,5 +437,31 @@ void modifier_utilisateur(){
         printf("\nUtilisateur modifie avec succes.\n");
     }else{
         remove("DATABASE/TEMP.dat");
-    }   
+    }
+}
+
+int verifier_role(int idUtilisateur){
+    FILE *f;
+    User u;
+    int role = 0;
+
+        if (f == NULL)
+    {
+        role = 0;
+        return 0;
+    }
+    while (fread(&u, sizeof(User), 1, f) == 1){
+        
+        if (u.id == idUtilisateur)
+        {
+            if(strcmp(u.role, "ADMIN") == 0){
+                role = 1;
+            }else if(strcmp(u.role, "USER") == 0){
+                role = 2;
+            }
+            break;
+        }
+    }
+    fclose(f);
+    return role;
 }

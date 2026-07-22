@@ -1,5 +1,5 @@
-#ifndef USERS
-#define USERS
+#ifndef USERS_H
+#define USERS_H
 
 typedef struct{
     int id;
@@ -24,6 +24,6 @@ void supprimer_utilisateur();
 int recherche_id(int);
 int connexion();
 void menuAdmin();
-void menuUser();
 void modifier_utilisateur();
+int verifier_role(int);
 #endif
