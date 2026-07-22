@@ -2,15 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "USERS.h"
-<<<<<<< HEAD
-int main()
-{
-    printf("Hello world!\n");
-     //ajouterUtilisateur();
-    afficherUtilisateurs();
-    supprimer_utilisateur();
-    //connexion();
-=======
 #include "authors.h"
 #include "books.h"
 #include "categories.h"
@@ -89,7 +80,6 @@ int main() {
                 printf("\nChoix invalide ! Veuillez reessayer.\n");
         }
     } while (choix != 0);
->>>>>>> feature/rapport
 
     return 0;
 }

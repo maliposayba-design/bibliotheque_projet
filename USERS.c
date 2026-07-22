@@ -63,11 +63,7 @@ void ajouterUtilisateur(){
     scanf("%s", u.role);
 
     if(strcmp(u.role, "ADMIN") != 0 && strcmp(u.role, "USER") != 0){
-<<<<<<< HEAD
-        printf("Le r�le doit �tre ADMIN ou USER uniquement.\n");
-=======
         printf("Le role doit etre ADMIN ou USER uniquement.\n");
->>>>>>> feature/rapport
     }
     }while(strcmp(u.role, "ADMIN") != 0 && strcmp(u.role, "USER") != 0);
 
@@ -231,7 +227,7 @@ int connexion(){
 
     fclose(f);
     fclose(temp);
-    
+
     if (trouve){
         remove("DATABASE/USERS.dat");
         rename("DATABASE/TEMP.dat", "DATABASE/USERS.dat");
@@ -249,7 +245,7 @@ void menuAdmin()
     int choix;
 
     do{
-        
+
         printf("\nMenu Admin :\n");
         printf("1. Ajouter un utilisateur\n");
         printf("2. Afficher les utilisateurs\n");
@@ -459,5 +455,5 @@ void modifier_utilisateur(){
         printf("\nUtilisateur modifie avec succes.\n");
     }else{
         remove("DATABASE/TEMP.dat");
-    }   
+    }
 }
