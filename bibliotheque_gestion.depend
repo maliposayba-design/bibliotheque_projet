@@ -1,5 +1,6 @@
 # depslib dependency file v1.0
-<<<<<<< HEAD
+1770152 <<<<<<< HEAD
+
 1783967331 source:c:\cours\langage c\projets_langage_c\bibliotheque_gestion\categories.c
 	<stdio.h>
 	"categories.h"
@@ -28,7 +29,9 @@
 	<stdio.h>
 	<string.h>
 	"books.h"
-=======
+
+1783971791 
+
 1783961191 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\main.c
 	<stdio.h>
 	<stdlib.h>
@@ -42,5 +45,58 @@
 	<string.h>
 	<ctype.h>
 	"USERS.h"
->>>>>>> laye
+
+1783961408 e
+
+1784626389 source:c:\users\user\desktop\bibliotheque_projet\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"USERS.h"
+	"authors.h"
+	"books.h"
+	"categories.h"
+	"penalites.h"
+	"retours.h"
+	"reservation.h"
+	"statistiques.h"
+	"rapports.h"
+
+1784387982 c:\users\user\desktop\bibliotheque_projet\users.h
+
+1784387982 c:\users\user\desktop\bibliotheque_projet\authors.h
+	"books.h"
+
+1784387982 c:\users\user\desktop\bibliotheque_projet\books.h
+	"authors.h"
+	"categories.h"
+
+1784387982 c:\users\user\desktop\bibliotheque_projet\categories.h
+
+1784387155 c:\users\user\desktop\bibliotheque_projet\reservation.h
+	"USERS.h"
+	"books.h"
+
+1784626389 c:\users\user\desktop\bibliotheque_projet\statistiques.h
+	"USERS.h"
+	"books.h"
+
+1784387982 source:c:\users\user\desktop\bibliotheque_projet\users.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"USERS.h"
+
+1784626421 source:c:\users\user\desktop\bibliotheque_projet\statistiques.c
+	"statistiques.h"
+	"reservation.h"
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<time.h>
+
+1784727887 c:\users\user\desktop\bibliotheque_projet\rapports.h
+	"USERS.h"
+	"books.h"
 

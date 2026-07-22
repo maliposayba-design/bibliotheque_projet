@@ -5,8 +5,6 @@
 #include "authors.h"
 #include "books.h"
 #include "categories.h"
-#include "penalites.h"
-#include "retours.h"
 #include "reservation.h"
 #include "statistiques.h"
 #include "rapports.h"
@@ -28,11 +26,8 @@ void afficher_menu_principal() {
 
 int main() {
     system("title Bibliotheque E-LIBRARY ISI DAKAR");
-    system("color 0A");
 
-    printf("╔═══════════════════════════════════════════════════════╗\n");
-    printf("║     BIENVENUE A LA BIBLIOTHEQUE E-LIBRARY ISI         ║\n");
-    printf("╚═══════════════════════════════════════════════════════╝\n");
+    printf("========================BIENVENUE A LA BIBLIOTHEQUE E-LIBRARY ISI========================\n");
     printf("\n");
 
     int choix;
