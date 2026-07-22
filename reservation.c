@@ -177,12 +177,7 @@ void afficher_liste_reservations(){
     printf("----------------------------------------------------------------------\n");
     rewind(f);
     while (fread(&R, sizeof(RESERVATION), 1, f) == 1){
-        printf("%-5d %-15d %-10d %-20s %-10s\n",
-               R.id,
-               R.idUtilisateur,
-               R.idLivre,
-               R.dateReservation,
-               R.etat);
+        printf("%-5d %-15d %-10d %-20s %-10s\n",R.id,R.idUtilisateur,R.idLivre,R.dateReservation,R.etat);
         compteur++;
     }
 
