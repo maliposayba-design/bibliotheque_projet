@@ -2,6 +2,7 @@
 #include "rapports.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include<time.h>
 
 char* getdatetime(){
@@ -48,6 +49,77 @@ int generer_id_reservation(){
 
     return dernier.id + 1;
 }
+void* lire_fichier(const char* nom, size_t taille, int* nb) {
+    FILE* f = fopen(nom, "rb");
+    if (f == NULL) {
+        *nb = 0;
+        return NULL;
+    }
+
+    fseek(f, 0, SEEK_END);
+    long tailleFichier = ftell(f);
+    *nb = tailleFichier / taille;
+    rewind(f);
+
+    void* data = malloc(tailleFichier);
+    if (data == NULL) {
+        fclose(f);
+        *nb = 0;
+        return NULL;
+    }
+
+    fread(data, taille, *nb, f);
+    fclose(f);
+    return data;
+}
+int utilisateur_existe(int id) {
+    int nb;
+    User* users = lire_fichier("DATABASE/USERS.dat", sizeof(User), &nb);
+    if (users == NULL) return 0;
+
+    for (int i = 0; i < nb; i++) {
+        if (users[i].id == id) {
+            free(users);
+            return 1;
+        }
+    }
+    free(users);
+    return 0;
+}
+
+int livre_existe(int id) {
+    int nb;
+    BOOK* livres = lire_fichier("DATABASE/BOOKS.dat", sizeof(BOOK), &nb);
+    if (livres == NULL) return 0;
+
+    for (int i = 0; i < nb; i++) {
+        if (livres[i].id == id) {
+            free(livres);
+            return 1;
+        }
+    }
+    free(livres);
+    return 0;
+}
+BOOK* get_livre_par_id(int id) {
+    int nb;
+    BOOK* livres = lire_fichier("DATABASE/BOOKS.dat", sizeof(BOOK), &nb);
+    if (livres == NULL) return NULL;
+
+    for (int i = 0; i < nb; i++) {
+        if (livres[i].id == id) {
+            BOOK* result = malloc(sizeof(BOOK));
+            if (result != NULL) {
+                *result = livres[i];
+            }
+            free(livres);
+            return result;
+        }
+    }
+    free(livres);
+    return NULL;
+}
+
 
 void saisir_reservation(RESERVATION *R){
     int idUtilisateur, idLivre;
@@ -150,7 +222,7 @@ void ajouter_reservation(){
     printf("   Statut : EN ATTENTE\n");
     char detail[200];
     sprintf(detail, "Reservation du livre ID: %d par utilisateur ID: %d", idLivre, idUtilisateur);
-    ecrirehistorique("Reservation", detail);
+    ecrire_historique("Reservation", detail);
 }
 
 void afficher_reservation(RESERVATION R){
@@ -324,7 +396,7 @@ void annuler_reservation(){
                 printf("\nReservation annulee avec succes !\n");
                 char detail[100];
                 sprintf(detail, "Annulation reservation ID: %d", id);
-                ecrirehistorique("Annulation reservation", detail);
+                ecrire_historique("Annulation reservation", detail);
                 trouve = 1;
             }
             break;
@@ -436,7 +508,7 @@ void verifier_reservations_apres_retour(int idLivre){
             printf("Reservation ID %d maintenant DISPONIBLE !\n", r->id);
             char detail[150];
             sprintf(detail, "Reservation ID %d devenue disponible (retour livre ID %d)", r->id, idLivre);
-            ecrirehistorique("Reservation disponible", detail);
+            ecrire_historique("Reservation disponible", detail);
             trouve = 1;
             break;
         }

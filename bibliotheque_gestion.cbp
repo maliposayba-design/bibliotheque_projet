@@ -33,17 +33,49 @@
 		</Compiler>
 		<Unit filename="DATABASE/.gitkeep" />
 		<Unit filename="DATABASE/USERS.dat" />
+		<Unit filename="Emprunt.h" />
+		<Unit filename="Penalites.h" />
+		<Unit filename="Retours.h" />
 		<Unit filename="USERS.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="USERS.h" />
+		<Unit filename="authors.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="authors.h" />
+		<Unit filename="books.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="books.h" />
+		<Unit filename="categories.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="categories.h" />
+		<Unit filename="emprunts.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="menu.h" />
+		<Unit filename="penalites.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="rapports.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="rapports.h" />
 		<Unit filename="reservation.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="reservation.h" />
+		<Unit filename="retours.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="statistiques.c">
 			<Option compilerVar="CC" />
 		</Unit>

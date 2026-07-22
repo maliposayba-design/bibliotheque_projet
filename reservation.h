@@ -2,6 +2,7 @@
 #define RESERVATIONS_H
 #include "USERS.h"
 #include "books.h"
+#include <stdio.h>
 
 typedef struct{
     int id;
@@ -11,6 +12,7 @@ typedef struct{
     char etat[20];
 } RESERVATION;
 
+void* lire_fichier(const char* nom, size_t taille, int* nb);
 char* getdatetime();
 char* getdate();
 void menu_reservations();
