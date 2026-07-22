@@ -20,16 +20,16 @@ void ajouterUtilisateur(){
     u.id = id_utilisateur();
 
     printf("Nom : ");
-    scanf("%s",u.nom);
+    scanf("%49s", u.nom);
 
     printf("Prenom : ");
-    scanf("%s",u.prenom);
+    scanf("%49s", u.prenom);
 
     printf("Telephone : ");
     scanf("%d",&u.telephone);
 
     printf("Email : ");
-    scanf("%s",u.email);
+    scanf("%99s",u.email);
 
     int minuscule, log;
     do{
@@ -194,9 +194,9 @@ int connexion(){
     printf("CONNEXION\n");
 
         printf("Login : ");
-        scanf("%s", login);
+        scanf("%14s", login);
         printf("Mot de passe : ");
-        scanf("%s", motPasse);
+        scanf("%99s", motPasse);
 
     while(fread(&u, sizeof(User), 1, f))
     {
@@ -208,14 +208,14 @@ int connexion(){
             {
                 printf("\nC'est votre premiere connexion, veuillez changer votre mot de passe.\n");
                 printf("Nouveau mot de passe : ");
-                scanf("%s", u.motPasse);
+                scanf("%99s", u.motPasse);
                 u.premierconnexion = 0;
             }
 
             printf("\nConnexion reussie.\n");
             printf("Bienvenue %s %s\n", u.prenom, u.nom);
             printf("\nEntrez la date de derniere connexion (jj/mm/aaaa) : ");
-            scanf("%s", u.derniereConnexion);
+            scanf("%19s", u.derniereConnexion);
             
 
             if(strcmp(u.role, "ADMIN") == 0)
@@ -414,22 +414,22 @@ void modifier_utilisateur(){
                 trouve = 1;
                 printf("\nModification de l'utilisateur.\n");
                 printf("Nom : ");
-                scanf("%s",u.nom);
+                scanf("%49s",u.nom);
 
                 printf("Prenom : ");
-                scanf("%s",u.prenom);
+                scanf("%49s",u.prenom);
 
                 printf("Telephone : ");
                 scanf("%d",&u.telephone);
 
                 printf("Email : ");
-                scanf("%s",u.email);
+                scanf("%99s",u.email);
 
                 printf("Role (ADMIN/USER) : ");
-                scanf("%s", u.role);
+                scanf("%99s", u.role);
 
                 printf("Etat (ACTIF/INACTIF) : ");
-                scanf("%s", u.etat);
+                scanf("%99s", u.etat);
 
             }
             fwrite(&u, sizeof(User), 1, temp);
