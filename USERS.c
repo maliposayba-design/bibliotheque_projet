@@ -278,24 +278,6 @@ void menuAdmin()
     }while(choix != 5);
 }
 
-void menuUser(){
-    int choix;
-    do{
-        printf("\nMenu Utilisateur :\n");
-        printf("1. connexion\n");
-        printf("Votre choix : ");
-        scanf("%d", &choix);
-
-        switch(choix)
-        {
-            case 1:
-                connexion();
-                break;
-            default:
-                printf("Choix invalide.\n");
-        }
-    }while(choix != 1);
-}
 
 void supprimer_utilisateur(){
     FILE *f;
@@ -456,4 +438,30 @@ void modifier_utilisateur(){
     }else{
         remove("DATABASE/TEMP.dat");
     }
+}
+
+int verifier_role(int idUtilisateur){
+    FILE *f;
+    User u;
+    int role = 0;
+
+        if (f == NULL)
+    {
+        role = 0;
+        return 0;
+    }
+    while (fread(&u, sizeof(User), 1, f) == 1){
+        
+        if (u.id == idUtilisateur)
+        {
+            if(strcmp(u.role, "ADMIN") == 0){
+                role = 1;
+            }else if(strcmp(u.role, "USER") == 0){
+                role = 2;
+            }
+            break;
+        }
+    }
+    fclose(f);
+    return role;
 }

@@ -51,7 +51,6 @@ int compterEmprunts(int idUtilisateur) {
         return 0;
     }
 
-    Emprunt emp;
     int compteur = 0;
     while (fread(&emp, sizeof(EMPRUNT), 1, f)) {
         if (emp.idUtilisateur == idUtilisateur && strcmp(emp.etat, "EN_COURS") == 0) {
@@ -64,6 +63,7 @@ int compterEmprunts(int idUtilisateur) {
 
 
 int verifierstock(int isbn_recherche){
+        
         FILE *f_books = fopen("DATABASE/BOOKS.dat", "rb+");
         if (f_books == NULL) {
             printf("[Erreur] Impossible d'ouvrir le registre des livres (BOOKS.dat).\n");
@@ -73,7 +73,7 @@ int verifierstock(int isbn_recherche){
             if (strcmp(livre_courant.isbn, isbn_recherche) == 0) {
                 livre_trouve = 1;
                   if (livre_courant.stock <= 0) {
-                    printf("[Alerte] Le livre '%s' est épuisé (Stock : 0).\n", livre_courant.titre);
+                    printf("[Alerte] Le livre '%s' est ï¿½puisï¿½ (Stock : 0).\n", livre_courant.titre);
                     fclose(f_books);
                     return;
                 }
@@ -83,7 +83,7 @@ int verifierstock(int isbn_recherche){
         }
 
         if (!livre_trouve) {
-            printf("[Erreur] Aucun livre trouvé avec l'ISBN : %s\n", isbn_recherche);
+            printf("[Erreur] Aucun livre trouvï¿½ avec l'ISBN : %s\n", isbn_recherche);
             fclose(f_books);
             return;
         }
@@ -119,16 +119,16 @@ void AjouterEmprunt(){
     }
     U = trouverUtilisateurParId(idUser);
     if (U.id == -1) {
-        printf("Erreur : Utilisateur non trouvé !\n");
+        printf("Erreur : Utilisateur non trouvï¿½ !\n");
         return;
     }
     L = trouverLivreParId(idLiv);
     if (L.id == -1) {
-        printf("Erreur : Livre non trouvé !\n");
+        printf("Erreur : Livre non trouvï¿½ !\n");
         return;
     }
     if (strcmp(U.etat, "BLOQUE") == 0) {
-        printf("Erreur : Votre compte est bloqué !\n");
+        printf("Erreur : Votre compte est bloquï¿½ !\n");
         return;
     }
      if (livre.nb_disponible <= 0) {
