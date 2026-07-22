@@ -451,7 +451,7 @@ int verifier_role(int idUtilisateur){
     FILE *f;
     User u;
     int role = 0;
-
+    f = fopen("DATABASE/USERS.dat", "rb");
         if (f == NULL)
     {
         role = 0;

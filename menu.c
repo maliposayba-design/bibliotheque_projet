@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "operation.h"
+#include "ctype.h"
+#include "menu.h"
 #include "books.h"
 #include "USERS.h"
 #include "categories.h"
@@ -126,7 +127,7 @@ void menu_principal_bibliotheque()
             if (idConnexion != 0)
             {
                 utilisateurConnecte = 1;
-                role = verifier_role_utilisateur(idConnexion);
+                role = verifier_role(idConnexion);
                 if (role == 1)
                 {
                     menu_admin();
