@@ -63,7 +63,11 @@ void ajouterUtilisateur(){
     scanf("%s", u.role);
 
     if(strcmp(u.role, "ADMIN") != 0 && strcmp(u.role, "USER") != 0){
+<<<<<<< HEAD
         printf("Le r�le doit �tre ADMIN ou USER uniquement.\n");
+=======
+        printf("Le role doit etre ADMIN ou USER uniquement.\n");
+>>>>>>> feature/rapport
     }
     }while(strcmp(u.role, "ADMIN") != 0 && strcmp(u.role, "USER") != 0);
 

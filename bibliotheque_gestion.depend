@@ -48,6 +48,42 @@
 
 1783961408 e
 
+<<<<<<< HEAD
+=======
+1784626389 source:c:\users\user\desktop\bibliotheque_projet\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"USERS.h"
+	"authors.h"
+	"books.h"
+	"categories.h"
+	"penalites.h"
+	"retours.h"
+	"reservation.h"
+	"statistiques.h"
+	"rapports.h"
+
+1784387982 c:\users\user\desktop\bibliotheque_projet\users.h
+
+1784387982 c:\users\user\desktop\bibliotheque_projet\authors.h
+	"books.h"
+
+1784387982 c:\users\user\desktop\bibliotheque_projet\books.h
+	"authors.h"
+	"categories.h"
+
+1784387982 c:\users\user\desktop\bibliotheque_projet\categories.h
+
+1784387155 c:\users\user\desktop\bibliotheque_projet\reservation.h
+	"USERS.h"
+	"books.h"
+
+1784626389 c:\users\user\desktop\bibliotheque_projet\statistiques.h
+	"USERS.h"
+	"books.h"
+
+>>>>>>> feature/rapport
 1784387982 source:c:\users\user\desktop\bibliotheque_projet\users.c
 	<stdio.h>
 	<stdlib.h>
@@ -55,9 +91,13 @@
 	<ctype.h>
 	"USERS.h"
 
+<<<<<<< HEAD
 1784387982 c:\users\user\desktop\bibliotheque_projet\users.h
 
 1784625902 source:c:\users\user\desktop\bibliotheque_projet\statistiques.c
+=======
+1784626421 source:c:\users\user\desktop\bibliotheque_projet\statistiques.c
+>>>>>>> feature/rapport
 	"statistiques.h"
 	"reservation.h"
 	<stdio.h>
@@ -65,6 +105,7 @@
 	<stdlib.h>
 	<time.h>
 
+<<<<<<< HEAD
 1784625988 c:\users\user\desktop\bibliotheque_projet\statistiques.h
 	"USERS.h"
 	"books.h"
@@ -79,6 +120,9 @@
 1784387982 c:\users\user\desktop\bibliotheque_projet\categories.h
 
 1784387155 c:\users\user\desktop\bibliotheque_projet\reservation.h
+=======
+1784727887 c:\users\user\desktop\bibliotheque_projet\rapports.h
+>>>>>>> feature/rapport
 	"USERS.h"
 	"books.h"
 

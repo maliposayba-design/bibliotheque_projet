@@ -1,5 +1,9 @@
 #include "reservation.h"
+<<<<<<< HEAD
 #include "rapport.h"
+=======
+#include "rapports.h"
+>>>>>>> feature/rapport
 #include <stdio.h>
 #include <string.h>
 #include<time.h>
