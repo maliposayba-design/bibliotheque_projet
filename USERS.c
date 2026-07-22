@@ -63,7 +63,7 @@ void ajouterUtilisateur(){
     scanf("%s", u.role);
 
     if(strcmp(u.role, "ADMIN") != 0 && strcmp(u.role, "USER") != 0){
-        printf("Le rôle doit être ADMIN ou USER uniquement.\n");
+        printf("Le rï¿½le doit ï¿½tre ADMIN ou USER uniquement.\n");
     }
     }while(strcmp(u.role, "ADMIN") != 0 && strcmp(u.role, "USER") != 0);
 
@@ -74,6 +74,8 @@ void ajouterUtilisateur(){
     scanf("%s",u.dateCreation);
 
     strcpy(u.derniereConnexion,"Aucune");
+
+    u.premierconnexion = 1;
 
     fwrite(&u,sizeof(User),1,f);
 
@@ -164,7 +166,7 @@ int login_existe(char login[]){
 
 int connexion(){
     FILE *f;
-
+    FILE *temp;
     User u;
 
     char login[15];
@@ -174,10 +176,13 @@ int connexion(){
 
 
     f = fopen("DATABASE/USERS.dat", "rb");
+    temp = fopen("DATABASE/TEMP.dat", "wb");
 
-    if(f == NULL)
+    if(f == NULL || temp == NULL)
     {
         printf("Impossible d'ouvrir le fichier.\n");
+        fclose(f);
+        fclose(temp);
         return 0;
     }
 
@@ -193,7 +198,13 @@ int connexion(){
         if(strcmp(login, u.login) == 0 &&
            strcmp(motPasse, u.motPasse) == 0)
         {
-            fclose(f);
+            if(u.premierconnexion == 1)
+            {
+                printf("\nC'est votre premiere connexion, veuillez changer votre mot de passe.\n");
+                printf("Nouveau mot de passe : ");
+                scanf("%s", u.motPasse);
+                u.premierconnexion = 0;
+            }
 
             printf("\nConnexion reussie.\n");
             printf("Bienvenue %s %s\n", u.prenom, u.nom);
@@ -242,14 +253,14 @@ void menuAdmin()
             case 2:
                 afficherUtilisateurs();
                 break;
-            printf("Samira c'est toi qui doit remplire ca");
+            
         }
 
     }while(choix != 0);
 }
 
 void menuUser(){
-    printf("Samira c'est toi qui doit remplire ca");
+    
 }
 
 void supprimer_utilisateur(){
