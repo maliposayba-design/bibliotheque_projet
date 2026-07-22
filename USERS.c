@@ -168,7 +168,8 @@ int connexion(){
     FILE *f;
     FILE *temp;
     User u;
-
+    int id = 0;
+     int trouve = 0;
     char login[15];
     char motPasse[100];
 
@@ -195,9 +196,10 @@ int connexion(){
 
     while(fread(&u, sizeof(User), 1, f))
     {
-        if(strcmp(login, u.login) == 0 &&
-           strcmp(motPasse, u.motPasse) == 0)
-        {
+        if(strcmp(login, u.login) == 0 && strcmp(motPasse, u.motPasse) == 0){
+
+            trouve = 1;
+            id = u.id;
             if(u.premierconnexion == 1)
             {
                 printf("\nC'est votre premiere connexion, veuillez changer votre mot de passe.\n");
@@ -218,14 +220,21 @@ int connexion(){
                 printf("Vous etes connecte en tant qu'UTILISATEUR.\n");
             }
 
-            return 1;
         }
+
+        fwrite(&u, sizeof(User), 1, temp);
     }
 
     fclose(f);
-    printf("\nLogin ou mot de passe incorrecte");
-
-    return 0;
+    
+    if (trouve){
+        remove("DATABASE/USERS.dat");
+        rename("DATABASE/TEMP.dat", "DATABASE/USERS.dat");
+    }else{
+        remove("DATABASE/TEMP.dat");
+        printf("\nLogin ou mot de passe incorrect.\n");
+    }
+    return id;
 
 }
 
