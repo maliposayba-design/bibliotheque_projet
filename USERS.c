@@ -359,3 +359,70 @@ int recherche_id(int id){
     fclose(f);
     return 0;
 }
+
+void modifier_utilisateur(){
+    FILE *f;
+    FILE *temp;
+    int id;
+    User u;
+    int trouve = 0;
+    int confirmation;
+
+    f=fopen("DATABASE/USERS.dat","rb");
+    temp=fopen("DATABASE/TEMP.dat","wb");
+    if(f== NULL){
+        printf("erreur lors de l'ouverture du fichier U");
+        return 0;
+    }
+    if(temp == NULL){
+        printf("erreur lors de l'ouverture du fichier T");
+        return 0;
+    }
+
+     while(fread(&u, sizeof(User), 1, f) == 1){
+        if (u.id == id){
+
+            printf("\nID : %d",u.id);
+            printf("\nNom : %s",u.nom);
+            printf("\nPrenom : %s",u.prenom);
+
+            printf("\nVoulez-vous modifier cette utilisateur?\n");
+            printf("1. Oui\n");
+            printf("2. Non\n");
+            do{
+                 printf("Votre choix :");
+                scanf("%d", &confirmation);
+            }while(confirmation != 1 && confirmation != 2);
+            if(confirmation == 1)
+            {
+                trouve = 1;
+                printf("\nModification de l'utilisateur.\n");
+                printf("Nom : ");
+                scanf("%s",u.nom);
+
+                printf("Prenom : ");
+                scanf("%s",u.prenom);
+
+                printf("Telephone : ");
+                scanf("%d",&u.telephone);
+
+                printf("Email : ");
+                scanf("%s",u.email);
+
+                printf("Role (ADMIN/USER) : ");
+                scanf("%s", u.role);
+
+                printf("Etat (ACTIF/INACTIF) : ");
+                scanf("%s", u.etat);
+
+            }
+            fwrite(&u, sizeof(User), 1, temp);
+        }
+     }
+     if (trouve){
+        remove("DATABASE/USERS.dat");
+        rename("DATABASE/TEMP.dat", "DATABASE/USERS.dat");
+    }else{
+        remove("DATABASE/TEMP.dat");
+    }   
+}
