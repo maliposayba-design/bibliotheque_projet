@@ -226,6 +226,7 @@ int connexion(){
     }
 
     fclose(f);
+    fclose(temp);
     
     if (trouve){
         remove("DATABASE/USERS.dat");
@@ -243,33 +244,57 @@ void menuAdmin()
 {
     int choix;
 
-    do
-    {
-        printf("\n MENU ADMIN n");
-
+    do{
+        
+        printf("\nMenu Admin :\n");
         printf("1. Ajouter un utilisateur\n");
         printf("2. Afficher les utilisateurs\n");
-
-        printf("\nChoix : ");
-        scanf("%d",&choix);
+        printf("3. Supprimer un utilisateur\n");
+        printf("4. Modifier un utilisateur\n");
+        printf("5. Deconnexion\n");
+        printf("Votre choix : ");
+        scanf("%d", &choix);
 
         switch(choix)
         {
             case 1:
                 ajouterUtilisateur();
                 break;
-
             case 2:
                 afficherUtilisateurs();
                 break;
-            
+            case 3:
+                supprimer_utilisateur();
+                break;
+            case 4:
+                modifier_utilisateur();
+                break;
+            case 5:
+                printf("Deconnexion...\n");
+                break;
+            default:
+                printf("Choix invalide.\n");
         }
-
-    }while(choix != 0);
+    }while(choix != 5);
 }
 
 void menuUser(){
-    
+    int choix;
+    do{
+        printf("\nMenu Utilisateur :\n");
+        printf("1. connexion\n");
+        printf("Votre choix : ");
+        scanf("%d", &choix);
+
+        switch(choix)
+        {
+            case 1:
+                connexion();
+                break;
+            default:
+                printf("Choix invalide.\n");
+        }
+    }while(choix != 1);
 }
 
 void supprimer_utilisateur(){
@@ -419,9 +444,13 @@ void modifier_utilisateur(){
             fwrite(&u, sizeof(User), 1, temp);
         }
      }
+     fclose(f);
+     fclose(temp);
+
      if (trouve){
         remove("DATABASE/USERS.dat");
         rename("DATABASE/TEMP.dat", "DATABASE/USERS.dat");
+        printf("\nUtilisateur modifie avec succes.\n");
     }else{
         remove("DATABASE/TEMP.dat");
     }   
