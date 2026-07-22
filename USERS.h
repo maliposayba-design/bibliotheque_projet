@@ -25,4 +25,5 @@ int recherche_id(int);
 int connexion();
 void menuAdmin();
 void menuUser();
+void modifier_utilisateur();
 #endif

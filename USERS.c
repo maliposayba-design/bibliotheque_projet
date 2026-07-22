@@ -63,7 +63,7 @@ void ajouterUtilisateur(){
     scanf("%s", u.role);
 
     if(strcmp(u.role, "ADMIN") != 0 && strcmp(u.role, "USER") != 0){
-        printf("Le rôle doit être ADMIN ou USER uniquement.\n");
+        printf("Le rï¿½le doit ï¿½tre ADMIN ou USER uniquement.\n");
     }
     }while(strcmp(u.role, "ADMIN") != 0 && strcmp(u.role, "USER") != 0);
 
@@ -74,6 +74,8 @@ void ajouterUtilisateur(){
     scanf("%s",u.dateCreation);
 
     strcpy(u.derniereConnexion,"Aucune");
+
+    u.premierconnexion = 1;
 
     fwrite(&u,sizeof(User),1,f);
 
@@ -164,9 +166,10 @@ int login_existe(char login[]){
 
 int connexion(){
     FILE *f;
-
+    FILE *temp;
     User u;
-
+    int id = 0;
+     int trouve = 0;
     char login[15];
     char motPasse[100];
 
@@ -174,10 +177,13 @@ int connexion(){
 
 
     f = fopen("DATABASE/USERS.dat", "rb");
+    temp = fopen("DATABASE/TEMP.dat", "wb");
 
-    if(f == NULL)
+    if(f == NULL || temp == NULL)
     {
         printf("Impossible d'ouvrir le fichier.\n");
+        fclose(f);
+        fclose(temp);
         return 0;
     }
 
@@ -190,10 +196,17 @@ int connexion(){
 
     while(fread(&u, sizeof(User), 1, f))
     {
-        if(strcmp(login, u.login) == 0 &&
-           strcmp(motPasse, u.motPasse) == 0)
-        {
-            fclose(f);
+        if(strcmp(login, u.login) == 0 && strcmp(motPasse, u.motPasse) == 0){
+
+            trouve = 1;
+            id = u.id;
+            if(u.premierconnexion == 1)
+            {
+                printf("\nC'est votre premiere connexion, veuillez changer votre mot de passe.\n");
+                printf("Nouveau mot de passe : ");
+                scanf("%s", u.motPasse);
+                u.premierconnexion = 0;
+            }
 
             printf("\nConnexion reussie.\n");
             printf("Bienvenue %s %s\n", u.prenom, u.nom);
@@ -207,14 +220,22 @@ int connexion(){
                 printf("Vous etes connecte en tant qu'UTILISATEUR.\n");
             }
 
-            return 1;
         }
+
+        fwrite(&u, sizeof(User), 1, temp);
     }
 
     fclose(f);
-    printf("\nLogin ou mot de passe incorrecte");
-
-    return 0;
+    fclose(temp);
+    
+    if (trouve){
+        remove("DATABASE/USERS.dat");
+        rename("DATABASE/TEMP.dat", "DATABASE/USERS.dat");
+    }else{
+        remove("DATABASE/TEMP.dat");
+        printf("\nLogin ou mot de passe incorrect.\n");
+    }
+    return id;
 
 }
 
@@ -223,33 +244,57 @@ void menuAdmin()
 {
     int choix;
 
-    do
-    {
-        printf("\n MENU ADMIN n");
-
+    do{
+        
+        printf("\nMenu Admin :\n");
         printf("1. Ajouter un utilisateur\n");
         printf("2. Afficher les utilisateurs\n");
-
-        printf("\nChoix : ");
-        scanf("%d",&choix);
+        printf("3. Supprimer un utilisateur\n");
+        printf("4. Modifier un utilisateur\n");
+        printf("5. Deconnexion\n");
+        printf("Votre choix : ");
+        scanf("%d", &choix);
 
         switch(choix)
         {
             case 1:
                 ajouterUtilisateur();
                 break;
-
             case 2:
                 afficherUtilisateurs();
                 break;
-            printf("Samira c'est toi qui doit remplire ca");
+            case 3:
+                supprimer_utilisateur();
+                break;
+            case 4:
+                modifier_utilisateur();
+                break;
+            case 5:
+                printf("Deconnexion...\n");
+                break;
+            default:
+                printf("Choix invalide.\n");
         }
-
-    }while(choix != 0);
+    }while(choix != 5);
 }
 
 void menuUser(){
-    printf("Samira c'est toi qui doit remplire ca");
+    int choix;
+    do{
+        printf("\nMenu Utilisateur :\n");
+        printf("1. connexion\n");
+        printf("Votre choix : ");
+        scanf("%d", &choix);
+
+        switch(choix)
+        {
+            case 1:
+                connexion();
+                break;
+            default:
+                printf("Choix invalide.\n");
+        }
+    }while(choix != 1);
 }
 
 void supprimer_utilisateur(){
@@ -338,4 +383,75 @@ int recherche_id(int id){
     }
     fclose(f);
     return 0;
+}
+
+void modifier_utilisateur(){
+    FILE *f;
+    FILE *temp;
+    int id;
+    User u;
+    int trouve = 0;
+    int confirmation;
+
+    f=fopen("DATABASE/USERS.dat","rb");
+    temp=fopen("DATABASE/TEMP.dat","wb");
+    if(f== NULL){
+        printf("erreur lors de l'ouverture du fichier U");
+        return 0;
+    }
+    if(temp == NULL){
+        printf("erreur lors de l'ouverture du fichier T");
+        return 0;
+    }
+
+     while(fread(&u, sizeof(User), 1, f) == 1){
+        if (u.id == id){
+
+            printf("\nID : %d",u.id);
+            printf("\nNom : %s",u.nom);
+            printf("\nPrenom : %s",u.prenom);
+
+            printf("\nVoulez-vous modifier cette utilisateur?\n");
+            printf("1. Oui\n");
+            printf("2. Non\n");
+            do{
+                 printf("Votre choix :");
+                scanf("%d", &confirmation);
+            }while(confirmation != 1 && confirmation != 2);
+            if(confirmation == 1)
+            {
+                trouve = 1;
+                printf("\nModification de l'utilisateur.\n");
+                printf("Nom : ");
+                scanf("%s",u.nom);
+
+                printf("Prenom : ");
+                scanf("%s",u.prenom);
+
+                printf("Telephone : ");
+                scanf("%d",&u.telephone);
+
+                printf("Email : ");
+                scanf("%s",u.email);
+
+                printf("Role (ADMIN/USER) : ");
+                scanf("%s", u.role);
+
+                printf("Etat (ACTIF/INACTIF) : ");
+                scanf("%s", u.etat);
+
+            }
+            fwrite(&u, sizeof(User), 1, temp);
+        }
+     }
+     fclose(f);
+     fclose(temp);
+
+     if (trouve){
+        remove("DATABASE/USERS.dat");
+        rename("DATABASE/TEMP.dat", "DATABASE/USERS.dat");
+        printf("\nUtilisateur modifie avec succes.\n");
+    }else{
+        remove("DATABASE/TEMP.dat");
+    }   
 }
