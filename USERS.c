@@ -403,6 +403,8 @@ void modifier_utilisateur(){
         printf("erreur lors de l'ouverture du fichier T");
         return 0;
     }
+    printf("\nEntre l'id de l'utilisateur que vous voulez modifier:");
+    scanf("%d",&id);
 
      while(fread(&u, sizeof(User), 1, f) == 1){
         if (u.id == id){
