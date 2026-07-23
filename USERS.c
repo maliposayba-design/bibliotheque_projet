@@ -420,22 +420,53 @@ void modifier_utilisateur(){
                 trouve = 1;
                 printf("\nModification de l'utilisateur.\n");
                 printf("Nom : ");
-                scanf("%49s",u.nom);
+                scanf("%49s", u.nom);
 
                 printf("Prenom : ");
-                scanf("%49s",u.prenom);
+                scanf("%49s", u.prenom);
 
-                printf("Telephone : ");
-                scanf("%d",&u.telephone);
+        printf("Telephone : ");
+        scanf("%d",&u.telephone);
 
-                printf("Email : ");
-                scanf("%99s",u.email);
+        printf("Email : ");
+        scanf("%99s",u.email);
 
-                printf("Role (ADMIN/USER) : ");
-                scanf("%99s", u.role);
+        int minuscule, log;
+        do{
 
-                printf("Etat (ACTIF/INACTIF) : ");
-                scanf("%99s", u.etat);
+            minuscule=0;
+            printf("Login : ");
+            scanf("%s",u.login);
+            for (int i = 0; u.login[i] != '\0'; i++) {
+                if(u.login[i] < 'A' || u.login[i] > 'Z') {
+                    minuscule = 1;
+                    break;
+                }
+            }
+            if(minuscule !=0){
+                printf("Le login doit contenir uniquement des lettre en majuscule\n");
+            }
+
+            if (strlen(u.login) != 6) {
+                printf("Le login doit contenir exactement 6 caracteres\n");
+            }
+            log = login_existe(u.login);
+            if (log == 1) {
+                printf("Ce login existe deja, veuillez en choisir un autre.\n");
+            }
+        }while(minuscule != 0 || strlen(u.login) != 6 || log != 0);
+
+        strcpy(u.motPasse,"Library123");
+        crypter(u.motPasse);
+
+        do{
+        printf("Role (ADMIN/USER) : ");
+        scanf("%s", u.role);
+
+        if(strcmp(u.role, "ADMIN") != 0 && strcmp(u.role, "USER") != 0){
+            printf("Le role doit etre ADMIN ou USER uniquement.\n");
+        }
+        }while(strcmp(u.role, "ADMIN") != 0 && strcmp(u.role, "USER") != 0);
 
             }
             fwrite(&u, sizeof(User), 1, temp);

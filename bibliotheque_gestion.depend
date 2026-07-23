@@ -32,7 +32,7 @@
 
 1783971791 
 
-1784765364 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\main.c
+1784795582 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -45,18 +45,19 @@
 	"rapports.h"
 	"menu.h"
 
-1784761490 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\users.h
+1784771081 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\users.h
 
-1784765436 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\users.c
+1784774930 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\users.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 	"USERS.h"
+	"reservation.h"
 
 1783961408 e
 
-1784626421 D
+1784762504 D
 
 1784760140 source:c:\users\user\desktop\bibliotheque_projet\main.c
 	<stdio.h>
@@ -205,33 +206,32 @@
 	"USERS.h"
 	"Penalites.h"
 
-<<<<<<< HEAD
 1784762502 source:c:\users\user\desktop\bibliotheque_projet\menu.c
-=======
-1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\authors.c
+
+1784771081 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\authors.c
 	<stdio.h>
 	"books.h"
 	"authors.h"
 
-1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\books.h
+1784771081 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\books.h
 	"authors.h"
 	"categories.h"
 
-1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\authors.h
+1784771081 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\authors.h
 	"books.h"
 
-1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\categories.h
+1784771081 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\categories.h
 
-1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\books.c
+1784771081 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\books.c
 	<stdio.h>
 	<string.h>
 	"books.h"
 
-1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\categories.c
+1784771081 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\categories.c
 	<stdio.h>
 	"categories.h"
 
-1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\emprunts.c
+1784771081 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\emprunts.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -242,33 +242,34 @@
 	"books.h"
 	"USERS.h"
 
-1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\penalites.h
+1784771169 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\penalites.h
 
-1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\emprunt.h
+1784771169 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\emprunt.h
+	"structure.h"
 	"books.h"
 	"USERS.h"
 
-1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\retours.h
+1784771169 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\retours.h
+	"structure.h"
 	"Emprunt.h"
 	"Penalites.h"
 
-1784762865 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\reservation.h
+1784771081 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\reservation.h
 	"USERS.h"
 	"books.h"
 	<stdio.h>
 
-1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\statistiques.h
+1784771081 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\statistiques.h
 	"USERS.h"
 	"books.h"
 
-1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\rapports.h
+1784771081 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\rapports.h
 	"USERS.h"
 	"books.h"
 
-1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\menu.h
+1784771081 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\menu.h
 
-1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\menu.c
->>>>>>> 8413bd94e6b1cbf38fff33b1c965547270cc736b
+1784771081 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\menu.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -282,9 +283,21 @@
 	"statistiques.h"
 	"rapports.h"
 
-<<<<<<< HEAD
-=======
-1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\penalites.c
+1784762504 3bd94e6b1cbf38fff33b1c965547270cc736b
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ctype.h"
+	"menu.h"
+	"books.h"
+	"USERS.h"
+	"categories.h"
+	"authors.h"
+	"reservation.h"
+	"statistiques.h"
+	"rapports.h"
+
+1784771169 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\penalites.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -292,8 +305,9 @@
 	"Emprunt.h"
 	"books.h"
 	"USERS.h"
+	"structure.h"
 
-1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\rapports.c
+1784771169 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\rapports.c
 	"rapports.h"
 	"statistiques.h"
 	"reservation.h"
@@ -303,17 +317,18 @@
 	<stdlib.h>
 	<time.h>
 
-1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\structure.h
+1784771169 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\structure.h
 
-1784762865 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\reservation.c
+1784771169 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\reservation.c
 	"reservation.h"
 	"rapports.h"
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
+	"books.h"
 	<time.h>
 
-1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\retours.c
+1784771081 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\retours.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -324,7 +339,7 @@
 	"USERS.h"
 	"Penalites.h"
 
-1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\statistiques.c
+1784771169 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\statistiques.c
 	"statistiques.h"
 	"reservation.h"
 	"structure.h"
@@ -333,4 +348,3 @@
 	<stdlib.h>
 	<time.h>
 
->>>>>>> 8413bd94e6b1cbf38fff33b1c965547270cc736b
