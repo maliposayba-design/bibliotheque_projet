@@ -26,4 +26,5 @@ int connexion();
 void menuAdmin();
 void modifier_utilisateur();
 int verifier_role(int);
+void crypter(char mdp[]);
 #endif

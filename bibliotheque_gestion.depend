@@ -32,14 +32,22 @@
 
 1783971791 
 
-1783961191 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\main.c
+1784765364 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\main.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 	"USERS.h"
+	"authors.h"
+	"books.h"
+	"categories.h"
+	"reservation.h"
+	"statistiques.h"
+	"rapports.h"
+	"menu.h"
 
-1783959832 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\users.h
+1784761490 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\users.h
 
-1783961408 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\users.c
+1784765436 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\users.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -192,4 +200,126 @@
 	"books.h"
 	"USERS.h"
 	"Penalites.h"
+
+1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\authors.c
+	<stdio.h>
+	"books.h"
+	"authors.h"
+
+1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\books.h
+	"authors.h"
+	"categories.h"
+
+1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\authors.h
+	"books.h"
+
+1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\categories.h
+
+1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\books.c
+	<stdio.h>
+	<string.h>
+	"books.h"
+
+1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\categories.c
+	<stdio.h>
+	"categories.h"
+
+1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\emprunts.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"Penalites.h"
+	"Emprunt.h"
+	"Retours.h"
+	"books.h"
+	"USERS.h"
+
+1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\penalites.h
+
+1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\emprunt.h
+	"books.h"
+	"USERS.h"
+
+1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\retours.h
+	"Emprunt.h"
+	"Penalites.h"
+
+1784762865 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\reservation.h
+	"USERS.h"
+	"books.h"
+	<stdio.h>
+
+1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\statistiques.h
+	"USERS.h"
+	"books.h"
+
+1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\rapports.h
+	"USERS.h"
+	"books.h"
+
+1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\menu.h
+
+1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ctype.h"
+	"menu.h"
+	"books.h"
+	"USERS.h"
+	"categories.h"
+	"authors.h"
+	"reservation.h"
+	"statistiques.h"
+	"rapports.h"
+
+1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\penalites.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Penalites.h"
+	"Emprunt.h"
+	"books.h"
+	"USERS.h"
+
+1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\rapports.c
+	"rapports.h"
+	"statistiques.h"
+	"reservation.h"
+	"structure.h"
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<time.h>
+
+1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\structure.h
+
+1784762865 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\reservation.c
+	"reservation.h"
+	"rapports.h"
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<time.h>
+
+1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\retours.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"Retours.h"
+	"Emprunt.h"
+	"books.h"
+	"USERS.h"
+	"Penalites.h"
+
+1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\statistiques.c
+	"statistiques.h"
+	"reservation.h"
+	"structure.h"
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<time.h>
 
