@@ -44,6 +44,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="authors.h" />
+		<Unit filename="bibliotheque_gestion.cbp" />
+		<Unit filename="bibliotheque_gestion.depend" />
+		<Unit filename="bibliotheque_gestion.layout" />
 		<Unit filename="books.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -55,6 +58,7 @@
 		<Unit filename="emprunts.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="git branch" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

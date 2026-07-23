@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "books.h"
 #include "authors.h"
 
@@ -287,7 +289,7 @@ void supprimer_auteur()
             {
                 trouve = 1;
                 printf("\nAuteur supprime avec succes.\n");
-                continue;   // Ne pas copier cet auteur
+                continue;
             }
         }
 

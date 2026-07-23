@@ -56,7 +56,7 @@
 
 1783961408 e
 
-1784626421 D
+1784762504 D
 
 1784760140 source:c:\users\user\desktop\bibliotheque_projet\main.c
 	<stdio.h>
@@ -71,7 +71,7 @@
 	"rapports.h"
 	"menu.h"
 
-1784760140 c:\users\user\desktop\bibliotheque_projet\users.h
+1784771852 c:\users\user\desktop\bibliotheque_projet\users.h
 
 1784387982 c:\users\user\desktop\bibliotheque_projet\authors.h
 	"books.h"
@@ -104,7 +104,7 @@
 	"USERS.h"
 	"books.h"
 
-1784762502 source:c:\users\user\desktop\bibliotheque_projet\users.c
+1784771852 source:c:\users\user\desktop\bibliotheque_projet\users.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -137,8 +137,10 @@
 	"books.h"
 	<time.h>
 
-1784387982 source:c:\users\user\desktop\bibliotheque_projet\authors.c
+1784771864 source:c:\users\user\desktop\bibliotheque_projet\authors.c
 	<stdio.h>
+	<stdlib.h>
+	<string.h>
 	"books.h"
 	"authors.h"
 
@@ -205,9 +207,8 @@
 	"USERS.h"
 	"Penalites.h"
 
-<<<<<<< HEAD
 1784762502 source:c:\users\user\desktop\bibliotheque_projet\menu.c
-=======
+
 1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\authors.c
 	<stdio.h>
 	"books.h"
@@ -268,7 +269,8 @@
 1784762504 d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\menu.h
 
 1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\menu.c
->>>>>>> 8413bd94e6b1cbf38fff33b1c965547270cc736b
+
+1784762504 3bd94e6b1cbf38fff33b1c965547270cc736b
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -282,8 +284,6 @@
 	"statistiques.h"
 	"rapports.h"
 
-<<<<<<< HEAD
-=======
 1784762504 source:d:\l1gl\langage c isi\projet\gestion bibliotec examen\bibliotheque_projet\penalites.c
 	<stdio.h>
 	<stdlib.h>
@@ -333,4 +333,3 @@
 	<stdlib.h>
 	<time.h>
 
->>>>>>> 8413bd94e6b1cbf38fff33b1c965547270cc736b
