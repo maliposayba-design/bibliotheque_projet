@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "USERS.h"
-
+#include "reservation.h"
 
 void ajouterUtilisateur(){
     FILE *f;
@@ -71,8 +71,7 @@ void ajouterUtilisateur(){
 
     strcpy(u.etat,"ACTIF");
 
-    printf("Entre la date de creation (jj/mm/aaaa hh:mm:ss) : ");
-    scanf("%49s",u.dateCreation);
+    strcpy(u.dateCreation,getdatetime());
 
     strcpy(u.derniereConnexion,"Aucune");
 
@@ -220,8 +219,9 @@ int connexion(){
 
             printf("\nConnexion reussie.\n");
             printf("Bienvenue %s %s\n", u.prenom, u.nom);
-            printf("\nEntrez la date de derniere connexion (jj/mm/aaaa hh:mm:ss) : ");
-            scanf("%49s", u.derniereConnexion);
+            
+            strcpy(u.derniereConnexion, getdatetime());
+
 
 
             if(strcmp(u.role, "ADMIN") == 0)
