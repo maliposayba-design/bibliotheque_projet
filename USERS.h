@@ -11,8 +11,8 @@ typedef struct{
     char motPasse[100];
     char role[10];
     char etat[10];
-    char dateCreation[20];
-    char derniereConnexion[20];
+    char dateCreation[50];
+    char derniereConnexion[50];
     int premierconnexion;
 }User;
 
