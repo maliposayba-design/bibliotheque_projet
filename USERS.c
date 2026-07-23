@@ -57,6 +57,7 @@ void ajouterUtilisateur(){
     }while(minuscule != 0 || strlen(u.login) != 6 || log != 0);
 
     strcpy(u.motPasse,"Library123");
+    crypter(u.motPasse);
 
     do{
     printf("Role (ADMIN/USER) : ");
@@ -136,6 +137,8 @@ void afficherUtilisateurs(){
 
         printf("\nEtat : %s",u.etat);
 
+        printf("\nmot de passe : %s",u.motPasse);
+
         printf("\nDate de creation : %s",u.dateCreation);
 
         printf("\nDerniere connexion : %s",u.derniereConnexion);
@@ -198,6 +201,8 @@ int connexion(){
         printf("Mot de passe : ");
         scanf("%99s", motPasse);
 
+        crypter(motPasse);
+
     while(fread(&u, sizeof(User), 1, f))
     {
         if(strcmp(login, u.login) == 0 && strcmp(motPasse, u.motPasse) == 0){
@@ -209,6 +214,7 @@ int connexion(){
                 printf("\nC'est votre premiere connexion, veuillez changer votre mot de passe.\n");
                 printf("Nouveau mot de passe : ");
                 scanf("%99s", u.motPasse);
+                crypter(u.motPasse);
                 u.premierconnexion = 0;
             }
 
@@ -216,7 +222,7 @@ int connexion(){
             printf("Bienvenue %s %s\n", u.prenom, u.nom);
             printf("\nEntrez la date de derniere connexion (jj/mm/aaaa) : ");
             scanf("%19s", u.derniereConnexion);
-            
+
 
             if(strcmp(u.role, "ADMIN") == 0)
             {
@@ -458,7 +464,7 @@ int verifier_role(int idUtilisateur){
         return 0;
     }
     while (fread(&u, sizeof(User), 1, f) == 1){
-        
+
         if (u.id == idUtilisateur)
         {
             if(strcmp(u.role, "ADMIN") == 0){
@@ -471,4 +477,10 @@ int verifier_role(int idUtilisateur){
     }
     fclose(f);
     return role;
+}
+
+void crypter(char mdp[]) {
+    for (int i = 0; mdp[i] != '\0'; i++) {
+        mdp[i] = mdp[i] + 1;
+    }
 }
