@@ -96,14 +96,13 @@ int compter_penalites_impayees() {
 
     int count = 0;
     for (int i = 0; i < nb; i++) {
-        if (penalites[i].payee == 0) {
+        if (strcmp(penalites[i].statut, "NON_PAYEE") == 0) {   // ← APRÈS
             count++;
         }
     }
     free(penalites);
     return count;
 }
-
 int compter_emprunts_du_jour() {
     char today[20];
     strcpy(today, getdate());
@@ -114,7 +113,7 @@ int compter_emprunts_du_jour() {
 
     int count = 0;
     for (int i = 0; i < nb; i++) {
-        if (strncmp(emprunts[i].dateEmprunt, today, 10) == 0) {
+        if (strncmp(emprunts[i].date_emprunt, today, 10) == 0) {
             count++;
         }
     }
@@ -132,7 +131,7 @@ int compter_retours_du_jour() {
 
     int count = 0;
     for (int i = 0; i < nb; i++) {
-        if (strncmp(retours[i].dateRetourEffective, today, 10) == 0) {
+        if (strncmp(retours[i].dateR, today, 10) == 0) {
             count++;
         }
     }
@@ -186,7 +185,7 @@ int compter_penalites_du_jour() {
 
     int count = 0;
     for (int i = 0; i < nb; i++) {
-        if (strncmp(penalites[i].dateCalcul, today, 10) == 0) {
+        if (strncmp(penalites[i].date, today, 10) == 0) {
             count++;
         }
     }
@@ -204,8 +203,8 @@ float montant_penalites_du_jour() {
 
     float total = 0;
     for (int i = 0; i < nb; i++) {
-        if (strncmp(penalites[i].dateCalcul, today, 10) == 0) {
-            total += penalites[i].montant;
+        if (strncmp(penalites[i].date, today, 10) == 0) {
+            total += penalites[i].mont_pen;
         }
     }
     free(penalites);
@@ -325,7 +324,7 @@ float get_montant_total_penalites() {
 
     float total = 0;
     for (int i = 0; i < nb; i++) {
-        total += penalites[i].montant;
+        total += penalites[i].mont_pen;
     }
     free(penalites);
     return total;

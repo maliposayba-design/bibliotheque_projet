@@ -5,6 +5,7 @@
 #include "Emprunt.h"
 #include "books.h"
 #include "USERS.h"
+#include "structure.h"
 
 void menuPenalites()
 {
