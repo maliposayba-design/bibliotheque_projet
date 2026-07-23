@@ -96,14 +96,14 @@
 	"USERS.h"
 	"books.h"
 
-1784760140 source:c:\users\user\desktop\bibliotheque_projet\users.c
+1784762502 source:c:\users\user\desktop\bibliotheque_projet\users.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 	"USERS.h"
 
-1784761095 source:c:\users\user\desktop\bibliotheque_projet\statistiques.c
+1784769702 source:c:\users\user\desktop\bibliotheque_projet\statistiques.c
 	"statistiques.h"
 	"reservation.h"
 	"structure.h"
@@ -118,14 +118,15 @@
 
 1784760140 c:\users\user\desktop\bibliotheque_projet\menu.h
 
-1784730481 c:\users\user\desktop\bibliotheque_projet\structure.h
+1784769396 c:\users\user\desktop\bibliotheque_projet\structure.h
 
-1784761979 source:c:\users\user\desktop\bibliotheque_projet\reservation.c
+1784766437 source:c:\users\user\desktop\bibliotheque_projet\reservation.c
 	"reservation.h"
 	"rapports.h"
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
+	"books.h"
 	<time.h>
 
 1784387982 source:c:\users\user\desktop\bibliotheque_projet\authors.c
@@ -142,7 +143,7 @@
 	<stdio.h>
 	"categories.h"
 
-1784762284 source:c:\users\user\desktop\bibliotheque_projet\rapports.c
+1784769276 source:c:\users\user\desktop\bibliotheque_projet\rapports.c
 	"rapports.h"
 	"statistiques.h"
 	"reservation.h"
@@ -163,17 +164,19 @@
 	"books.h"
 	"USERS.h"
 
-1784760140 c:\users\user\desktop\bibliotheque_projet\penalites.h
+1784769396 c:\users\user\desktop\bibliotheque_projet\penalites.h
 
-1784760140 c:\users\user\desktop\bibliotheque_projet\emprunt.h
+1784768483 c:\users\user\desktop\bibliotheque_projet\emprunt.h
+	"structure.h"
 	"books.h"
 	"USERS.h"
 
-1784760140 c:\users\user\desktop\bibliotheque_projet\retours.h
+1784768711 c:\users\user\desktop\bibliotheque_projet\retours.h
+	"structure.h"
 	"Emprunt.h"
 	"Penalites.h"
 
-1784760140 source:c:\users\user\desktop\bibliotheque_projet\penalites.c
+1784769396 source:c:\users\user\desktop\bibliotheque_projet\penalites.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -181,6 +184,7 @@
 	"Emprunt.h"
 	"books.h"
 	"USERS.h"
+	"structure.h"
 
 1784760140 source:c:\users\user\desktop\bibliotheque_projet\retours.c
 	<stdio.h>
@@ -192,4 +196,18 @@
 	"books.h"
 	"USERS.h"
 	"Penalites.h"
+
+1784762502 source:c:\users\user\desktop\bibliotheque_projet\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ctype.h"
+	"menu.h"
+	"books.h"
+	"USERS.h"
+	"categories.h"
+	"authors.h"
+	"reservation.h"
+	"statistiques.h"
+	"rapports.h"
 

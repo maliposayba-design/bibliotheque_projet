@@ -81,7 +81,7 @@ void generer_recu_emprunt(int idEmprunt) {
 
     EMPRUNT* E = NULL;
     for (int i = 0; i < nb; i++) {
-        if (emprunts[i].id == idEmprunt) {
+        if (emprunts[i].idEmprunt == idEmprunt) {
             E = &emprunts[i];
             break;
         }
@@ -139,12 +139,12 @@ void generer_recu_emprunt(int idEmprunt) {
 
     char nomFichier[200];
     char jour[3], mois[3], annee[5], heure[3], minute[3], seconde[3];
-    strncpy(jour, E->dateEmprunt, 2);
-    strncpy(mois, E->dateEmprunt + 3, 2);
-    strncpy(annee, E->dateEmprunt + 6, 4);
-    strncpy(heure, E->dateEmprunt + 11, 2);
-    strncpy(minute, E->dateEmprunt + 14, 2);
-    strncpy(seconde, E->dateEmprunt + 17, 2);
+    strncpy(jour, E->date_emprunt, 2);
+    strncpy(mois, E->date_emprunt + 3, 2);
+    strncpy(annee, E->date_emprunt + 6, 4);
+    strncpy(heure, E->date_emprunt + 11, 2);
+    strncpy(minute, E->date_emprunt + 14, 2);
+    strncpy(seconde, E->date_emprunt + 17, 2);
 
     jour[2] = '\0';
     mois[2] = '\0';
@@ -169,10 +169,10 @@ void generer_recu_emprunt(int idEmprunt) {
     fprintf(f, "          BIBLIOTHEQUE E-LIBRARY ISI\n");
     fprintf(f, "              RECU D'EMPRUNT\n");
     fprintf(f, "============================================\n\n");
-    fprintf(f, "Numero d'emprunt: %s\n", E->numEmprunt);
+    fprintf(f, "Numero d'emprunt: %s\n", E->num_emprunt);
     fprintf(f, "Lecteur : %s %s (%s)\n", user->prenom, user->nom, user->login);
-    fprintf(f, "Date d'emprunt : %s\n", E->dateEmprunt);
-    fprintf(f, "Date prevue retour: %s\n\n", E->dateRetourPrevue);
+    fprintf(f, "Date d'emprunt : %s\n", E->date_emprunt);
+    fprintf(f, "Date prevue retour: %s\n\n", E->date_retour);
     fprintf(f, "Livre emprunte    : %s\n", livre->titre);
 
     int nbAuteurs;
@@ -221,7 +221,7 @@ void generer_recu_retour(int idRetour) {
 
     RETOUR* R = NULL;
     for (int i = 0; i < nb; i++) {
-        if (retours[i].id == idRetour) {
+        if (retours[i].idRetour == idRetour) {
             R = &retours[i];
             break;
         }
@@ -242,7 +242,7 @@ void generer_recu_retour(int idRetour) {
 
     EMPRUNT* E = NULL;
     for (int i = 0; i < nbEmprunts; i++) {
-        if (emprunts[i].id == R->idEmprunt) {
+        if (emprunts[i].idEmprunt == R->idEmprunt) {
             E = &emprunts[i];
             break;
         }
@@ -305,12 +305,12 @@ void generer_recu_retour(int idRetour) {
     char nomFichier[200];
     char jour[3], mois[3], annee[5], heure[3], minute[3], seconde[3];
 
-    strncpy(jour, R->dateRetourEffective, 2);
-    strncpy(mois, R->dateRetourEffective + 3, 2);
-    strncpy(annee, R->dateRetourEffective + 6, 4);
-    strncpy(heure, R->dateRetourEffective + 11, 2);
-    strncpy(minute, R->dateRetourEffective + 14, 2);
-    strncpy(seconde, R->dateRetourEffective + 17, 2);
+    strncpy(jour, R->dateR, 2);
+    strncpy(mois, R->dateR + 3, 2);
+    strncpy(annee, R->dateR + 6, 4);
+    strncpy(heure, R->dateR + 11, 2);
+    strncpy(minute, R->dateR + 14, 2);
+    strncpy(seconde, R->dateR + 17, 2);
     jour[2] = '\0';
     mois[2] = '\0';
     annee[4] = '\0';
@@ -335,17 +335,17 @@ void generer_recu_retour(int idRetour) {
     fprintf(f, "          BIBLIOTHEQUE E-LIBRARY ISI\n");
     fprintf(f, "              RECU DE RETOUR\n");
     fprintf(f, "============================================\n\n");
-    fprintf(f, "Numero d'emprunt : %s\n", E->numEmprunt);
+    fprintf(f, "Numero d'emprunt : %s\n", E->num_emprunt);
     fprintf(f, "Lecteur : %s %s (%s)\n", user->prenom, user->nom, user->login);
-    fprintf(f, "Date de retour : %s\n\n", R->dateRetourEffective);
+    fprintf(f, "Date de retour : %s\n\n", R->dateR);
     fprintf(f, "Livre retourne : %s\n", livre->titre);
     fprintf(f, "ISBN : %s\n\n", livre->isbn);
 
-    if (R->enRetard) {
+    if (R->nbr_jourR) {
         fprintf(f, "           RETARD DETECTE !\n");
         fprintf(f, "============================================\n");
-        fprintf(f, "Date prevue : %s\n", E->dateRetourPrevue);
-        fprintf(f, "Penalite : %.2f FCFA\n\n", R->montantPenalite);
+        fprintf(f, "Date prevue : %s\n", E->date_retour);
+        fprintf(f, "Penalite : %.2f FCFA\n\n", R->mont_penalite);
         fprintf(f, "Merci de regler la penalite au plus vite.\n");
     } else {
         fprintf(f, "Retour dans les delais. Merci !\n");

@@ -1,16 +1,10 @@
 #ifndef RETOURS_H
 #define RETOURS_H
+#include "structure.h"
 #include "Emprunt.h"
 #include "Penalites.h"
 
-typedef struct
-{
-  int idRetour;
-  int idEmprunt;
-  char dateR[20];
-  int nbr_jourR;
-  int mont_penalite;
-}RETOUR;
+
 
 void menuRetours();
 void retournerLivre();

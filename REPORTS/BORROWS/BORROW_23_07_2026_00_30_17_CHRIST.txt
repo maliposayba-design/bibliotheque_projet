@@ -1,0 +1,10 @@
+=== RECU D'EMPRUNT ===
+Numero d'emprunt : EMP_20260723003017
+Lecteur : christ chadral
+Login : CHRIST
+Date d'emprunt : 23/07/2026 00:30:17
+Date prevue de retour : 06/08/2026 00:30:17
+BOOK : christ
+ID Auteur : 1
+ISBN : 12
+======================
